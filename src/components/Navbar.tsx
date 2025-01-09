@@ -10,13 +10,13 @@ const Navbar = () => {
                 </a>
             </div>
             <div className="space-x-6">
-                <a href="#home" className="text-snow hover:text-pigment-green">
+                <a href="/" className="text-snow hover:text-pigment-green">
                     Home
                 </a>
                 <a href="#about" className="text-snow hover:text-pigment-green">
                     About
                 </a>
-                <a href="#projects" className="text-snow hover:text-pigment-green">
+                <a href="/projects" className="text-snow hover:text-pigment-green">
                     My Projects
                 </a>
                 <a href="#resume" className="text-snow hover:text-pigment-green">
