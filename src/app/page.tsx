@@ -1,8 +1,20 @@
-import Image from "next/image";
+// src/app/page.tsx
+import Navbar from '../components/Navbar';
+import Homepage from '../components/Homepage';
+import About from '../components/About';
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div>
+      <Navbar />
+      <Homepage />
+      <About />
+    </div>
+  );
+}
+
+/*
+<div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <Image
           className="dark:invert"
@@ -97,5 +109,4 @@ export default function Home() {
         </a>
       </footer>
     </div>
-  );
-}
+    */
