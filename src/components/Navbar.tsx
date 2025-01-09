@@ -2,24 +2,24 @@
 
 const Navbar = () => {
   return (
-    <nav className="bg-black     text-snow px-8 md:px-16 lg:px-24">
+    <nav className="sticky top-0 z-50 bg-black text-snow px-8 md:px-16 lg:px-24">
         <div className="container py-2 flex justify-between items-center">
             <div className="text-2xl font-bold hidden md:inline">
-                <a href='#home'>
+                <a href='/'>
                     Arush
                 </a>
             </div>
-            <div className="space-x-6">
-                <a href="/" className="text-snow hover:text-pigment-green">
+            <div className="">
+                <a href="/" className="text-snow hover:text-pigment-green py-4 px-3">
                     Home
                 </a>
-                <a href="#about" className="text-snow hover:text-pigment-green">
+                <a href="/#about" className="text-snow hover:text-pigment-green py-4 px-3">
                     About
                 </a>
-                <a href="/projects" className="text-snow hover:text-pigment-green">
+                <a href="/projects" className="text-snow hover:text-pigment-green py-4 px-3">
                     My Projects
                 </a>
-                <a href="#resume" className="text-snow hover:text-pigment-green">
+                <a href="#resume" className="text-snow hover:text-pigment-green py-4 px-3">
                     Resume
                 </a>
             </div>

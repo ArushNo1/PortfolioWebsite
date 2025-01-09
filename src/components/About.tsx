@@ -1,20 +1,7 @@
 import React from "react";
 const ArushLogo = "/ArushBodlaWithoutBackground.svg";
 
-const ProgressBar = ({ label, width, gradientClass = "bg-gradient-to-r from-neon-green to-neon-blue" }: { label: string; width: number; gradientClass?: string }) => {
-    return (
-        <div className="flex items-center">
-            <label className="w-2/12">{label}</label>
-            <div className="grow bg-gray-800 rounded-full h-2.5">
-                <div
-                    className={`${gradientClass} h-2.5 rounded-full 
-                    transform transition-transform duration-300 hover:scale-105`}
-                    style={{ width: `${width}%` }}
-                ></div>
-            </div>
-        </div>
-    );
-};
+
 
 
 const About = () => {
@@ -31,16 +18,12 @@ const About = () => {
           <div className="flex-col">
             <div className="flex-1">
               <p className="text-lg mb-8">
-                I'm a sofware developer that loves thinking through challenging
+                I'm a software developer that loves thinking through challenging
                 problems and writing efficient solutions. A quick learner, I'm
                 always eager to improve my skills.
               </p>
             </div>
-            <div className="space-y-4">
-              <ProgressBar label="C++" width={95} />
-              <ProgressBar label="Machine Learning" width={85} />
-              <ProgressBar label="Java" width={80} />
-            </div>
+            
             <div className='mt-12 flex justify-between text-center'>
                 <div>
                     <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-tr from-neon-green to-neon-blue">
