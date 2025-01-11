@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 
-export default function Projects() {
+export default function ProjectPage() {
     return (
       <div>
         <Navbar />
