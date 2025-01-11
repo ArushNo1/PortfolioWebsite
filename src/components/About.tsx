@@ -1,9 +1,6 @@
 import React from "react";
 const ArushLogo = "/ArushBodlaWithoutBackground.svg";
 
-
-
-
 const About = () => {
   return (
     <div className="bg-black  text-about-text text-center py-16" id="about">
@@ -18,9 +15,7 @@ const About = () => {
           <div className="flex-col">
             <div className="flex-1">
               <p className="text-lg mb-8">
-                I'm a software developer that loves thinking through challenging
-                problems and writing efficient solutions. A quick learner, I'm
-                always eager to improve my skills.
+              I'm a passionate software developer who thrives on tackling complex problems and crafting efficient, well-thought-out solutions. As a quick learner, I'm constantly seeking opportunities to grow and refine my skills.
               </p>
             </div>
             

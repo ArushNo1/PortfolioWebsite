@@ -120,7 +120,7 @@ const Skills = () => {
             ))}
           </div>
           <div
-            ref={problemSolvingDivRef} // Attach the ref to this div
+            ref={problemSolvingDivRef} 
             className="flex overflow-x-auto scrollbar-hide scroll-smooth gap-8 pb-8"
           >
             {problemSolvingSkills.map((skill) => (
