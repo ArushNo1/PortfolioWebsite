@@ -13,6 +13,7 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(formData);
     setStatus("loading");
     try {
       const response = await fetch("/api/send-email", {
