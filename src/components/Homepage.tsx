@@ -4,7 +4,7 @@ const ArushLogo = "/ArushBodlaWithoutBackground.svg";
 const Homepage = () => {
   return (
     <div className='bg-black text-snow text-center py-16' id='home'>
-    <img src={ArushLogo} className="mx-auto h-40 w-40 mb-8 rounded-full object-cover transform transition-transform duration-300 hover:scale-105" alt="Arush Bodla logo" />
+    <img src={ArushLogo} className="mx-auto h-40 w-40 mb-8 rounded-lg object-cover transform transition-transform duration-300 hover:scale-105" alt="Arush Bodla logo" />
     <h1 className='text-4xl font-bold'>
         Hi, I'm {" "}
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-neon-blue">

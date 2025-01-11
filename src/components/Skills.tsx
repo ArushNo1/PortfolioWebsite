@@ -106,7 +106,7 @@ const Skills = () => {
           <h2 className="text-4xl font-bold text-center mb-12">My Skills</h2>
           <div
             ref={developDivRef} 
-            className="flex overflow-x-auto scrollbar-hide scroll-smooth gap-8 pb-8">
+            className="flex overflow-x-auto scrollbar-hide scroll-smooth gap-8 pb-4">
             {developSkills.map((skill) => (
               <div
                 key={skill.id}
@@ -121,12 +121,12 @@ const Skills = () => {
           </div>
           <div
             ref={problemSolvingDivRef} 
-            className="flex overflow-x-auto scrollbar-hide scroll-smooth gap-8 pb-8"
+            className="flex overflow-x-auto scrollbar-hide scroll-smooth gap-8 pb-4"
           >
             {problemSolvingSkills.map((skill) => (
               <div
                 key={skill.id}
-                className="w-80 flex-shrink-0 bg-gray-800 rounded-lg px-6 pb-6 hover:shadow-lg transform transition-transform duration-300 hover:scale-105"
+                className="w-80 flex-shrink-0 bg-gray-800 rounded-lg px-6 pb-6 hover:shadow-lg transform transition-transform duration-300 hover:scale-105 mt-4"
               >
                 <h3 className="mt-4 text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-tr from-pink-400 to-yellow-500">
                   {skill.title}
@@ -140,7 +140,7 @@ const Skills = () => {
             {softSkills.map((skill) => (
               <div
                 key={skill.id}
-                className="w-80 flex-shrink-0 bg-gray-800 rounded-lg px-6 pb-6 hover:shadow-lg transform transition-transform duration-300 hover:scale-105"
+                className="w-80 flex-shrink-0 bg-gray-800 rounded-lg px-6 pb-6 hover:shadow-lg transform transition-transform duration-300 hover:scale-105 mt-4"
               >
                 <h3 className="mt-4 text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gamboge to-neon-green">
                   {skill.title}
