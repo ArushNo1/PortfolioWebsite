@@ -2,13 +2,6 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 
-const images = [
-  {
-    id: 0,
-    src: "/ecospark.png",
-    alt: "EcoSpark",
-  },
-];
 
 const projects = [
   {
@@ -18,6 +11,10 @@ const projects = [
       "A serious game that teaches players the importance of budgeting and environmental sustainability.",
     github: "https://github.com/CognicadeStudios/EcoSpark",
     website: "https://pranavdivichenchu.wixstudio.com/main/blank-2",
+    image: {
+      src: "/ecospark.png",
+      alt: "EcoSpark",
+    }
   },
 ];
 
@@ -41,8 +38,8 @@ export default function ProjectPage() {
                 onClick={() => window.open(project.website, "_blank")} 
               >
                 <img
-                  src={images[0].src}
-                  alt={images[0].alt}
+                  src={project.image.src}
+                  alt={project.image.alt}
                   className="w-full h-48 object-cover rounded-lg rounded-tl-lg"
                 />
                 <div className="flex flex-row justify-between items-center">
