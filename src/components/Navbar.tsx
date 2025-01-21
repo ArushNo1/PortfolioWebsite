@@ -3,9 +3,9 @@ const Navbar = () => {
     <nav className="sticky top-0 z-50 bg-black text-snow px-8 md:px-16 lg:px-24">
       <div className="container py-2 flex justify-between items-center">
         {/* Left: Name */}
-        <div className="text-2xl font-bold hidden md:inline px-4">
-          <a href="/">Arush</a>
-        </div>
+        <a href="/">
+          <div className="text-2xl font-bold hidden md:inline px-4">Arush</div>
+        </a>
 
         {/* Center: Links */}
         <div className="flex justify-center flex-grow">
@@ -27,12 +27,12 @@ const Navbar = () => {
           >
             My Projects
           </a>
-          <a
+          {/* <a
             href="#resume"
             className="text-snow hover:text-gamboge py-4 px-3 transition-all duration-300 ease-in"
           >
             Resume
-          </a>
+          </a> */}
         </div>
 
         {/* Right: Contact Me Button */}

@@ -19,6 +19,9 @@ export default {
         'midnight-blue': '#2c3e50',
         'flame-red': '#e74c3c',
       },
+      boxShadow: {
+        white: "0px 4px 10px rgba(255, 255, 255, 0.5)",
+      },
     },
   },
   plugins: [require('tailwind-scrollbar-hide')],

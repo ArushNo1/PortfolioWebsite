@@ -5,6 +5,7 @@ import React, { useState } from "react";
 const Contact = () => {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errors, setErrors] = useState<{ email?: string; message?: string }>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -13,7 +14,20 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData);
+
+    // Reset errors before each submit attempt
+    setErrors({});
+
+    // Check for empty fields
+    if (!formData.email || !formData.message) {
+      // Set error messages for empty fields
+      const newErrors: { email?: string; message?: string } = {};
+      if (!formData.email) newErrors.email = "Email is required";
+      if (!formData.message) newErrors.message = "Message is required";
+      setErrors(newErrors);
+      return; // Prevent submission if there are errors
+    }
+
     setStatus("loading");
     try {
       const response = await fetch("/api/send-email", {
@@ -38,7 +52,7 @@ const Contact = () => {
       <div className="container mx-auto px-8">
         <h2 className="text-4xl font-bold text-center mb-12">
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-neon-blue">
-            Let's Talk
+            Let's Talk.
           </span>
         </h2>
         <div className="flex justify-center">
@@ -74,6 +88,7 @@ const Contact = () => {
                 className="w-full p-2 rounded bg-gray-800 border border-gray-600 focus:outline-none focus:border-neon-green"
                 placeholder="Enter Email"
               />
+              {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
             </div>
             <div>
               <label
@@ -90,6 +105,7 @@ const Contact = () => {
                 rows={5}
                 placeholder="Enter Message"
               />
+              {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
             </div>
             <button
               className="bg-gradient-to-r from-yellow-500 to-pink-400 text-white transform transition-transform duration-300 hover:scale-105 px-16 py-2 rounded-full"
