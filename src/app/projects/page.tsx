@@ -1,6 +1,7 @@
 "use client";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import { FaGithub } from "react-icons/fa";
 
 
 const projects = [
@@ -9,6 +10,7 @@ const projects = [
     title: "EcoSpark",
     description:
       "A serious game that teaches players the importance of budgeting and environmental sustainability.",
+    tech: ["Unity", "C#"],
     github: "https://github.com/CognicadeStudios/EcoSpark",
     website: "https://pranavdivichenchu.wixstudio.com/main/blank-2",
     image: {
@@ -16,6 +18,19 @@ const projects = [
       alt: "EcoSpark",
     }
   },
+  {
+    id:1,
+    title: "XL Chess",
+    description:
+      "A chess game that allows players to play against each other on a variety of board sizes.",
+    tech: ["Java", "JavaFX"],
+    github: "https://github.com/ArushNo1/XLChess",
+    website: "https://github.com/ArushNo1/XLChess",
+    image: {
+      src: "/xlchess.png",
+      alt: "XL Chess",
+    }
+  }
 ];
 
 export default function ProjectPage() {
@@ -42,15 +57,16 @@ export default function ProjectPage() {
                   alt={project.image.alt}
                   className="w-full h-48 object-cover rounded-lg rounded-tl-lg"
                 />
-                <div className="flex flex-row justify-between items-center">
-                  <h3 className="text-[1.75rem] font-bold py-3 bg-clip-text text-transparent bg-gradient-to-r from-neon-green to-neon-blue">
+                <div className="flex flex-row justify-between items-center pt-2 pb-1">
+                  <h3 className="text-[1.75rem] font-bold bg-clip-text text-transparent bg-gradient-to-r from-neon-green to-neon-blue">
                     {project.title}
                   </h3>
+                  <p className="text-gray-400 pt-1">{project.tech.join(", ")}</p>
                   <button
                     onClick={(e) => handleGithubClick(e, project.github)}
-                    className="bg-gradient-to-tr from-yellow-500 to-pink-400 text-white py-1 px-4 rounded-full mt-1 transform transition-transform duration-300 hover:scale-110"
+                    className="bg-gradient-to-tr from-yellow-500 to-pink-400 text-white py-1 px-2 rounded-full mt-1 transform transition-transform duration-300 hover:scale-110"
                   >
-                    Github
+                    <FaGithub />
                   </button>
                 </div>
                 <p>{project.description}</p>
