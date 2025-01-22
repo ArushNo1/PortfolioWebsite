@@ -30,6 +30,42 @@ const projects = [
       src: "/xlchess.png",
       alt: "XL Chess",
     }
+  },
+  {
+    id:2,
+    title: "Winter Wonderland",
+    description: "An image of a simple winter scene with a foreground and backgrond.",
+    tech: ["Java AWT"],
+    github: "https://github.com/ArushNo1/ITCS/tree/main/WinterWonderLand",
+    website: "https://github.com/ArushNo1/ITCS/blob/main/WinterWonderLand/WinterScene.png",
+    image: {
+      src: "/WinterScene.png",
+      alt: "Winter Wonderland",
+    }
+  },
+  {
+    id:3,
+    title: "Winter Warzone",
+    description: "A PvP game with online multiplayer with snowball launchers.",
+    tech: ["Unity", "Networking"],
+    github: "https://github.com/2900xt/WinterWarzone",
+    website: "https://github.com/2900xt/WinterWarzone",
+    image: {
+      src: "/WinterWarzone.png",
+      alt: "Winter Warzone",
+    }
+  },
+  {
+    id:4,
+    title: "Falcon 9",
+    description: "A simulation of the SpaceX Falcon 9 rocket with an animated launch sequence.",
+    tech: ["Java AWT"],
+    github: "https://github.com/ArushNo1/ITCS/tree/main/Falcon9",
+    website: "https://github.com/ArushNo1/ITCS/tree/main/Falcon9",
+    image: {
+      src: "/Falcon9.png",
+      alt: "Falcon 9",
+    }
   }
 ];
 
@@ -62,12 +98,15 @@ export default function ProjectPage() {
                     {project.title}
                   </h3>
                   <p className="text-gray-400 pt-1">{project.tech.join(", ")}</p>
-                  <button
-                    onClick={(e) => handleGithubClick(e, project.github)}
-                    className="bg-gradient-to-tr from-yellow-500 to-pink-400 text-white py-1 px-2 rounded-full mt-1 transform transition-transform duration-300 hover:scale-110"
-                  >
-                    <FaGithub />
-                  </button>
+                  <div className='align-top pb-1'>
+                    <button
+                      onClick={(e) => handleGithubClick(e, project.github)}
+                      className="bg-gradient-to-tr from-yellow-500 to-pink-400 text-white py-1 px-2 rounded-full mt-1 transform transition-transform duration-300 hover:scale-110"
+                    >
+                      <FaGithub />
+                    </button>
+                  </div>
+                  
                 </div>
                 <p>{project.description}</p>
               </div>
