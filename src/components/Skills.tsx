@@ -109,7 +109,7 @@ const Skills = () => {
             {developSkills.map((skill) => (
               <div
                 key={skill.id}
-                className="w-80 flex-shrink-0 bg-gray-800 rounded-lg px-6 pb-6 mt-4 transform transition-all duration-300 border border-transparent hover:border-gray-600"
+                className="w-80 xl:w-96 flex-shrink-0 bg-gray-800 rounded-lg px-6 pb-6 mt-4 transform transition-all duration-300 border border-transparent hover:border-gray-600"
               >
                 <h3 className="mt-4 text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-tr from-neon-green to-neon-blue">
                   {skill.title}
@@ -125,7 +125,7 @@ const Skills = () => {
             {problemSolvingSkills.map((skill) => (
               <div
                 key={skill.id}
-                className="w-80 flex-shrink-0 bg-gray-800 rounded-lg px-6 pb-6 mt-4 transform transition-all duration-300 border border-transparent hover:border-gray-600"
+                className="w-80 xl:w-96 flex-shrink-0 bg-gray-800 rounded-lg px-6 pb-6 mt-4 transform transition-all duration-300 border border-transparent hover:border-gray-600"
               >
                 <h3 className="mt-4 text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-tr from-pink-400 to-yellow-500">
                   {skill.title}
@@ -139,7 +139,7 @@ const Skills = () => {
             {softSkills.map((skill) => (
               <div
                 key={skill.id}
-                className="w-80 flex-shrink-0 bg-gray-800 rounded-lg px-6 pb-6 mt-4 transform transition-all duration-300 border border-transparent hover:border-gray-600"
+                className="w-80 xl:w-96 min-h-44 flex-shrink-0 bg-gray-800 rounded-lg px-6 pb-6 mt-4 transform transition-all duration-300 border border-transparent hover:border-gray-600"
               >
                 <h3 className="mt-4 text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gamboge to-neon-green">
                   {skill.title}

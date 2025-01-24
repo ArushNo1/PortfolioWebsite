@@ -6,7 +6,19 @@ import { FaGithub } from "react-icons/fa";
 
 const projects = [
   {
-    id: 0,
+    id:0,
+    title: "Winter Warzone",
+    description: "A PvP game with online multiplayer with snowball launchers.",
+    tech: ["Unity", "Networking"],
+    github: "https://github.com/2900xt/WinterWarzone",
+    website: "https://github.com/2900xt/WinterWarzone",
+    image: {
+      src: "/WinterWarzone.png",
+      alt: "Winter Warzone",
+    }
+  },
+  {
+    id: 1,
     title: "EcoSpark",
     description:
       "A serious game that teaches players the importance of budgeting and environmental sustainability.",
@@ -19,7 +31,7 @@ const projects = [
     }
   },
   {
-    id:1,
+    id: 2,
     title: "XL Chess",
     description:
       "A chess game that allows players to play against each other on a variety of board sizes.",
@@ -31,8 +43,45 @@ const projects = [
       alt: "XL Chess",
     }
   },
+  
   {
-    id:2,
+    id: 3,
+    title: "Falcon 9",
+    description: "A simulation of the SpaceX Falcon 9 rocket with an animated launch sequence.",
+    tech: ["Java AWT"],
+    github: "https://github.com/ArushNo1/ITCS/tree/main/Falcon9",
+    website: "https://github.com/ArushNo1/ITCS/tree/main/Falcon9",
+    image: {
+      src: "/Falcon9.png",
+      alt: "Falcon 9",
+    }
+  },
+  {
+    id: 4,
+    title: "Programming Templates",
+    description: "A collection of useful algorithms and data structures for competitive programming.",
+    tech: ["C++"],
+    github: "https://github.com/2900xt/cp-templates",
+    website: "https://github.com/2900xt/cp-templates",
+    image: {
+      src: "/Templates.png",
+      alt: "Programming Templates",
+    }
+  },
+  {
+    id: 5,
+    title: "Strategic Tic Tac Toe",
+    description: "A more challenging version that allows two players to play together.",
+    tech: ["C#", ".NET"],
+    github: "https://github.com/ArushNo1/ITCS/tree/main/Strategic%20Tic%20Tac%20Toe",
+    website: "https://github.com/ArushNo1/ITCS/releases/tag/v1.0.1",
+    image: {
+      src: "/StrategicTicTacToe.png",
+      alt: "Strategic Tic Tac Toe",
+    }
+  },
+  {
+    id: 6,
     title: "Winter Wonderland",
     description: "An image of a simple winter scene with a foreground and backgrond.",
     tech: ["Java AWT"],
@@ -44,27 +93,15 @@ const projects = [
     }
   },
   {
-    id:3,
-    title: "Winter Warzone",
-    description: "A PvP game with online multiplayer with snowball launchers.",
-    tech: ["Unity", "Networking"],
-    github: "https://github.com/2900xt/WinterWarzone",
-    website: "https://github.com/2900xt/WinterWarzone",
+    id: 7,
+    title: "Portfolio Site",
+    description: "The site you're currently on. Built to show off my projects and skills.",
+    tech: ["Next JS", "Tailwind CSS"],
+    github: "https://github.com/ArushNo1/PortfolioWebsite",
+    website: "/",
     image: {
-      src: "/WinterWarzone.png",
-      alt: "Winter Warzone",
-    }
-  },
-  {
-    id:4,
-    title: "Falcon 9",
-    description: "A simulation of the SpaceX Falcon 9 rocket with an animated launch sequence.",
-    tech: ["Java AWT"],
-    github: "https://github.com/ArushNo1/ITCS/tree/main/Falcon9",
-    website: "https://github.com/ArushNo1/ITCS/tree/main/Falcon9",
-    image: {
-      src: "/Falcon9.png",
-      alt: "Falcon 9",
+      src: "/PortfolioSite.png",
+      alt: "Portfolio Site",
     }
   }
 ];
