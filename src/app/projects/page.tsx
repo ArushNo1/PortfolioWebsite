@@ -1,6 +1,7 @@
 "use client";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import Image from "next/image";
 import { FaGithub } from "react-icons/fa";
 
 
@@ -125,7 +126,7 @@ export default function ProjectPage() {
                 className="bg-gray-800 rounded-2xl px-4 py-4 hover:shadow-lg transform transition-transform duration-300 hover:scale-105"
                 onClick={() => window.open(project.website, "_blank")} 
               >
-                <img
+                <Image
                   src={project.image.src}
                   alt={project.image.alt}
                   className="w-full h-48 object-cover rounded-lg rounded-tl-lg"
