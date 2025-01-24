@@ -1,10 +1,11 @@
+import Image from "next/image";
 import React from "react";
 const ArushLogo = "/ArushBodlaWithoutBackground.svg";
 
 const Homepage = () => {
   return (
     <div className="bg-black text-snow text-center py-16" id="home">
-      <img
+      <Image  
         src={ArushLogo}
         className="mx-auto h-40 w-40 mb-8 rounded-lg object-cover transform transition-transform duration-300 hover:scale-105"
         alt="Arush Bodla logo"
