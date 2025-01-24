@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 const ArushLogo = "/ArushBodlaWithoutBackground.svg";
 
@@ -7,15 +8,17 @@ const About = () => {
       <div className="container mx-auto px-8 md:px-16 lg:px-24">
         <h2 className="text-4xl font-bold text-center mb-12">About Me</h2>
         <div className="flex flex-col md:flex-row items-center md:space-x-12">
-          <img
+          <Image
             src={ArushLogo}
-            className="w-72 h-80 rounded object-cover mb-8 md:mb-0"
+            width={288}
+            height={320}
+            className="rounded object-cover mb-8 md:mb-0"
             alt="Arush Bodla logo"
           />
           <div className="flex-col">
             <div className="flex-1">
               <p className="text-lg mb-8">
-              I'm a passionate software developer who thrives on tackling complex problems and crafting efficient, well-thought-out solutions. As a quick learner, I'm constantly seeking opportunities to grow and refine my skills.
+              I&apos;m a passionate software developer who thrives on tackling complex problems and crafting efficient, well-thought-out solutions. As a quick learner, I&apos;m constantly seeking opportunities to grow and refine my skills.
               </p>
             </div>
             
