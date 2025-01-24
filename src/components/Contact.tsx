@@ -42,7 +42,7 @@ const Contact = () => {
       } else {
         setStatus("error");
       }
-    } catch (error) {
+    } catch (_) {
       setStatus("error");
     }
   };
@@ -52,7 +52,7 @@ const Contact = () => {
       <div className="container mx-auto px-8">
         <h2 className="text-4xl font-bold text-center mb-12">
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-neon-blue">
-            Let's Talk.
+            Let&apos;s Talk.
           </span>
         </h2>
         <div className="flex justify-center">
