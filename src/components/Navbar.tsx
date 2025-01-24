@@ -1,46 +1,38 @@
+import Link from "next/link";
+
 const Navbar = () => {
   return (
     <nav className="sticky top-0 z-50 bg-black text-snow px-8 md:px-16 lg:px-24">
       <div className="container py-2 flex justify-between items-center">
         {/* Left: Name */}
-        <a href="/">
+        <Link href="/">
           <div className="text-2xl font-bold hidden md:inline px-4">Arush</div>
-        </a>
+        </Link>
 
         {/* Center: Links */}
         <div className="flex justify-center flex-grow">
-          <a
-            href="/"
+          <Link href="/" 
             className="text-snow hover:text-gamboge py-4 px-3 transition-all duration-300 ease-in"
-          >
+          > 
             Home
-          </a>
-          <a
-            href="/#about"
+          </Link>
+          <Link href="/#about"
             className="text-snow hover:text-gamboge py-4 px-3 transition-all duration-300 ease-in"
           >
             About
-          </a>
-          <a
-            href="/projects"
+          </Link>
+          <Link href="/projects"
             className="text-snow hover:text-gamboge py-4 px-3 transition-all duration-300 ease-in"
           >
             My Projects
-          </a>
-          {/* <a
-            href="#resume"
-            className="text-snow hover:text-gamboge py-4 px-3 transition-all duration-300 ease-in"
-          >
-            Resume
-          </a> */}
+          </Link>
         </div>
 
-        {/* Right: Contact Me Button */}
-        <a href="/contact">
+        <Link href="/contact" passHref>
           <button className="transition-all duration-300 ease-in-out bg-pigment-green text-snow hover:bg-gamboge hover:scale-105 py-2 px-4 rounded-full mr-0">
             Contact Me
           </button>
-        </a>
+        </Link>
       </div>
     </nav>
   );

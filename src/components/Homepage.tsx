@@ -10,7 +10,7 @@ const Homepage = () => {
         alt="Arush Bodla logo"
       />
       <h1 className="text-4xl font-bold">
-        Hi, I'm{" "}
+        Hi, I&apos;m{" "}
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-neon-blue">
           Arush Bodla
         </span>
