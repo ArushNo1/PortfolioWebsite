@@ -42,7 +42,8 @@ const Contact = () => {
       } else {
         setStatus("error");
       }
-    } catch (_) {
+    } catch (error) {
+      console.error(error);
       setStatus("error");
     }
   };
