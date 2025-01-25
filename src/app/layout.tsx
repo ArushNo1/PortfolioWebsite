@@ -18,6 +18,12 @@ export const metadata: Metadata = {
   icons: {
     icon: "/ArushBodlaWithoutBackground.svg",
   },
+  openGraph: {
+    title: "Arush Bodla",
+    description: "My works",
+    url: "https://arushbodla.vercel.app",
+    type: "website",
+  }
 };
 
 export default function RootLayout({
