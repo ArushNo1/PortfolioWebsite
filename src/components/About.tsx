@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-const ArushLogo = "/ArushBodlaWithoutBackground.svg";
+const ArushLogo = "/SuitPic.png";
 
 const About = () => {
   return (
@@ -12,13 +12,19 @@ const About = () => {
             src={ArushLogo}
             width={288}
             height={320}
-            className="rounded object-cover mb-8 md:mb-0"
+            className="rounded-3xl object-cover mb-8 md:mb-0"
             alt="Arush Bodla logo"
           />
           <div className="flex-col">
             <div className="flex-1">
-              <p className="text-lg mb-8">
-              I&apos;m a passionate software developer who thrives on tackling complex problems and crafting efficient, well-thought-out solutions. As a quick learner, I&apos;m constantly seeking opportunities to grow and refine my skills.
+              <p className="text-lg mb-4 text-left">
+              I&apos;m a passionate software developer specializing in competitive programming, game development, and full-stack web applications. With 4+ years of hands-on experience, I excel at solving complex algorithmic challenges and building efficient, scalable systems.
+              </p>
+              <p className="text-lg mb-4 text-left">
+              As a competitive programmer, I&apos;ve participated in 25+ programming contests, consistently optimizing code for performance and accuracy. My expertise in C++, Java, and Python allows me to tackle diverse technical challenges across multiple domains.
+              </p>
+              <p className="text-lg mb-8 text-left">
+              Beyond coding, I&apos;m a technical leader who has organized hackathons, led programming clubs, and mentored peers in algorithm design and software development best practices.
               </p>
             </div>
             
