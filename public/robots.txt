@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# while you're here:
+# FLAG{robots_txt_reader} — you're exactly the kind of person arush wants to work with
+# /flag is real. you'll need to earn it.
+# Sitemap: https://arushbodla.vercel.app/sitemap.xml

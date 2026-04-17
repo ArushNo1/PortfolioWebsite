@@ -1,13 +1,15 @@
 import Navbar from '@/components/nav/Navbar'
 import Footer from '@/components/ui/Footer'
-import Contact from '@/components/contact/Contact'
+import LabClient from './LabClient'
+import { getAllPosts } from '@/lib/posts'
 
-export default function ContactPage() {
+export default function LabPage() {
+  const posts = getAllPosts()
   return (
     <>
       <Navbar />
       <main>
-        <Contact />
+        <LabClient posts={posts} />
       </main>
       <Footer />
     </>

@@ -1,18 +1,21 @@
-// src/app/page.tsx
-import Navbar from '@/components/Navbar';
-import Homepage from '@/components/Homepage';
-import About from '@/components/About';
-import Skills from '@/components/Skills';
-import Footer from '@/components/Footer';
+import Navbar from '@/components/nav/Navbar'
+import Hero from '@/components/home/Hero'
+import About from '@/components/home/About'
+import Skills from '@/components/home/Skills'
+import ChallengeSection from '@/components/home/ChallengeSection'
+import Footer from '@/components/ui/Footer'
 
 export default function Home() {
   return (
-    <div>
+    <>
       <Navbar />
-      <Homepage />
-      <About />
-      <Skills />
+      <main>
+        <Hero id="home" />
+        <About id="about" />
+        <Skills id="skills" />
+        <ChallengeSection id="challenges" />
+      </main>
       <Footer />
-    </div>
-  );
+    </>
+  )
 }
