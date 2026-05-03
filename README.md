@@ -1,37 +1,52 @@
-# Arush Bodla — Portfolio Website
+# arushbodla.vercel.app
 
-A personal portfolio website for Arush Bodla — software developer, competitive programmer, and game developer. Built with Next.js 15 App Router and Tailwind CSS. Showcases projects, skills, and a working contact form backed by Nodemailer + Gmail SMTP.
+Personal portfolio site. Next.js 15 App Router, TypeScript, Tailwind CSS. Terminal/hacker aesthetic with a three-tier CTF challenge system built in.
 
-**Live Demo:** [arushbodla.vercel.app](https://arushbodla.vercel.app)
-
----
-
-## Tech Stack
-
-| Layer | Technology |
-|---|---|
-| Framework | Next.js 15 (App Router) |
-| Language | TypeScript |
-| Styling | Tailwind CSS 3 |
-| Icons | react-icons |
-| Email | Nodemailer (Gmail SMTP) |
-| Icons | react-icons v5 |
-| Fonts | Geist Sans + Geist Mono (next/font/google) |
-| Deployment | Vercel |
+Live: **https://arushbodla.vercel.app**
 
 ---
 
-## Features
+## What's Here
 
-- **Hero section** — profile image, gradient headline, Contact Me + Resume CTA buttons
-- **About section** — bio paragraphs, suit photo, and stats row (4+ yrs / 15+ projects / 25+ competitions)
-- **Skills section** — 14 skill cards across three horizontally-scrollable rows (Development, Problem Solving, Soft Skills)
-- **Projects page** — responsive 3-column card grid with screenshots, tech tags, GitHub buttons, and click-to-visit
-- **Contact page** — validated form (name/email/message) with server-side email delivery via `/api/send-email`
-- **Sticky navbar** — links to all sections and a Contact CTA; hides logo on mobile
-- **Footer** — LinkedIn, GitHub, and Codeforces social links with dynamic copyright year
-- **SEO** — OpenGraph metadata, Google site verification meta tag, manually maintained `sitemap.xml`
-- **Custom Tailwind palette** — neon-green, neon-blue, gamboge, pigment-green, lake-blue, snow
+Beyond a standard portfolio, the site has a layered challenge system hidden on the home page. Solving each tier unlocks a new section:
+
+| Tier | Cipher | Unlocks |
+|---|---|---|
+| 1 | ROT13 | `/lab` — notes and writeups |
+| 2 | Double Base64 | `/graveyard` — abandoned project post-mortems |
+| 3 | XOR + hex encoding | `/flag` — completion certificate |
+
+There are also easter eggs outside the main challenge path — check the page source and API routes.
+
+---
+
+## Stack
+
+- **Framework:** Next.js 15 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS 3 with custom terminal color tokens
+- **Content:** MDX via `@next/mdx`, frontmatter via `gray-matter`
+- **Email:** Nodemailer (Gmail SMTP)
+- **Fonts:** Geist Mono (primary), Geist Sans
+- **Deployment:** Vercel
+
+---
+
+## Local Development
+
+```bash
+npm install
+npm run dev
+```
+
+Create `.env.local`:
+```
+EMAIL_USER=your@gmail.com
+EMAIL_PASSWORD=your-app-password
+RECIPIENT_EMAIL=inbox@example.com
+```
+
+Use a Gmail App Password, not your account password.
 
 ---
 
@@ -39,98 +54,59 @@ A personal portfolio website for Arush Bodla — software developer, competitive
 
 ```
 src/
-├── app/
-│   ├── layout.tsx          # Root layout: Geist fonts, metadata, global CSS
-│   ├── page.tsx            # Home — composes Navbar + Homepage + About + Skills + Footer
-│   ├── globals.css         # @tailwind directives only
-│   ├── projects/
-│   │   └── page.tsx        # Projects grid (data array + rendering, client component)
-│   ├── contact/
-│   │   └── page.tsx        # Contact page shell
-│   └── api/
-│       └── send-email/
-│           └── route.ts    # POST handler — Nodemailer Gmail SMTP
-├── components/
-│   ├── Navbar.tsx          # Sticky nav
-│   ├── Homepage.tsx        # Hero section
-│   ├── About.tsx           # Bio + photo + stats
-│   ├── Skills.tsx          # 3 scrollable skill rows (client component)
-│   ├── Contact.tsx         # Contact form with validation (client component)
-│   ├── Footer.tsx          # Social links
-│   ├── CFIcon.tsx          # Custom inline Codeforces SVG icon
-│   └── Progressbar.tsx     # Reusable gradient progress bar (built, not yet used)
-└── assets/
-    └── react.svg           # Unused CNA artifact
-public/                     # Project screenshots, logo SVGs, Resume.pdf, sitemap.xml
-tailwind.config.ts          # Custom color tokens + scrollbar-hide plugin
-next.config.ts              # Empty (no custom config needed)
+  app/               → Pages and API routes
+  components/        → UI components organized by domain
+    nav/             → Navbar
+    ui/              → TerminalBox, FlagBadge, Footer
+    home/            → Hero, About, Skills, ChallengeSection
+    challenges/      → ChallengeBox, ChallengeGate
+    projects/        → ProjectCard
+    lab/             → PostList
+    contact/         → Contact
+  data/              → Static content (projects, skills, challenges, graveyard)
+  lib/               → Crypto utilities, MDX post loader
+  content/posts/     → MDX blog posts
+public/              → Images and static assets
 ```
+
+Full developer guide (component map, styling conventions, challenge system internals): [`.claude/CLAUDE.md`](.claude/CLAUDE.md)
 
 ---
 
-## Getting Started
+## Adding Content
 
-### Prerequisites
+**New project** — add an entry to `src/data/projects.ts`
 
-- Node.js 18+
-- npm or yarn
-
-### Installation
-
-```bash
-git clone https://github.com/ArushNo1/NextJSPortfolio.git
-cd NextJSPortfolio
-npm install
+**New blog post** — create `src/content/posts/my-slug.mdx`:
+```yaml
+---
+title: 'Title'
+date: 'YYYY-MM-DD'
+description: 'One sentence.'
+published: true
+---
 ```
 
-### Environment Variables
-
-Create a `.env.local` file in the project root:
-
-```env
-EMAIL_USER=your-gmail@gmail.com
-EMAIL_PASSWORD=your-gmail-app-password
-RECIPIENT_EMAIL=your-inbox@gmail.com
-```
-
-> Use a [Gmail App Password](https://support.google.com/accounts/answer/185833) — not your main account password.
-
-### Development
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000).
-
-### Build & Start
-
-```bash
-npm run build
-npm run start
-```
+**New graveyard entry** — add to `src/data/graveyard.ts`
 
 ---
 
-## Deployment
+## TODO
 
-This project is deployed on **Vercel**. To deploy your own instance:
+### Content placeholders
+- [ ] Write real tagline in `src/components/home/Hero.tsx` (currently a placeholder)
+- [ ] Write real bio in `src/components/home/About.tsx` (currently a placeholder)
+- [ ] Fill in certificate text and MY_INSPIRATIONS section in `src/app/flag/page.tsx`
+- [ ] Replace `src/content/posts/example-post.mdx` with a real first post — it has `published: true` with TODO content, so it is currently visible in `/lab`
 
-1. Push the repository to GitHub.
-2. Import the repo at [vercel.com](https://vercel.com).
-3. Add the three environment variables (`EMAIL_USER`, `EMAIL_PASSWORD`, `RECIPIENT_EMAIL`) in the Vercel project settings.
-4. Deploy.
+### Cleanup
+- [ ] Uninstall dead npm packages: `emailjs`, `emailjs-com`, `next-sitemap`
+- [ ] Delete unused public assets: `file.svg`, `globe.svg`, `next.svg`, `vercel.svg`, `vite.svg`, `window.svg`, `ArushBodlaLogo.svg`, `ArushBodlaWithoutBackground-full.svg`, `Resume.pdf`
+- [ ] Delete `src/components/Progressbar.tsx` (built, never imported anywhere)
+- [ ] Delete `src/assets/react.svg` (default CNA artifact, never referenced)
 
----
-
-## Screenshots
-
-| Home |
-|---|
-| ![Home](public/PortfolioSite.png) |
-
----
-
-## License
-
-This project is for personal/portfolio use. No license is currently specified.
+### Features
+- [ ] Add `robots.txt` — `/api/ping` hints at it, completing the easter egg trail
+- [ ] Add `generateStaticParams` to `src/app/lab/[slug]/page.tsx` for static post generation at build time
+- [ ] Audit MDX prose styling — `prose-invert` on post pages may need custom overrides to match the terminal theme (code blocks, headings, links)
+- [ ] Set `example-post.mdx` to `published: false` until it has real content

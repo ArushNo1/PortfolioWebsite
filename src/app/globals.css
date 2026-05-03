@@ -1,9 +1,16 @@
+@import 'highlight.js/styles/atom-one-dark.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Let prose control the pre background; don't double-apply from hljs theme */
+.hljs {
+  background: transparent;
 }
 
 body {

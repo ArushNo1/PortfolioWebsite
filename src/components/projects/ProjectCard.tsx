@@ -40,7 +40,14 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           ))}
         </div>
 
-        <h3 className="text-terminal-amber text-sm font-bold mb-2">{project.name}</h3>
+        <div className="flex items-center justify-between gap-4 w-full mb-2">
+          <h3 className="text-terminal-amber text-sm font-bold">{project.name}</h3>
+          {project.event && (
+            <h4 className="text-terminal-green-muted text-xs text-right">
+              Built for {project.event}
+            </h4>
+          )}
+        </div>
 
         <p className="text-terminal-white text-xs leading-relaxed mb-4">
           {project.description}

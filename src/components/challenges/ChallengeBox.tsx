@@ -8,7 +8,6 @@ import { normalizeAnswer } from '@/lib/crypto'
 interface ChallengeBoxProps {
   tier: 1 | 2 | 3
   label: string
-  hint: string
   ciphertext: string
   flag: string
   storageKey: string
@@ -22,7 +21,6 @@ interface ChallengeBoxProps {
 export default function ChallengeBox({
   tier,
   label,
-  hint,
   ciphertext,
   flag,
   storageKey,
@@ -34,7 +32,7 @@ export default function ChallengeBox({
 }: ChallengeBoxProps) {
   const [input, setInput] = useState('')
   const [solved, setSolved] = useState(false)
-  const [skipped, setSkipped] = useState(false)
+  // const [skipped, setSkipped] = useState(false)
   const [error, setError] = useState('')
 
   useEffect(() => {
@@ -73,7 +71,7 @@ export default function ChallengeBox({
             {extraNote}
           </pre>
         )}
-        <div className="text-terminal-green-dim text-xs mt-2">{hint}</div>
+        {/* <div className="text-terminal-green-dim text-xs mt-2">{hint}</div> */}
       </div>
 
       {solved ? (
@@ -88,11 +86,13 @@ export default function ChallengeBox({
             </Link>
           </div>
         </div>
-      ) : skipped ? (
-        <div className="text-terminal-green-muted text-xs">
-          {'// challenge skipped — solve it later to unlock bonus content'}
-        </div>
-      ) : (
+      ) : 
+      // skipped ? (
+      //   <div className="text-terminal-green-muted text-xs">
+      //     {'// challenge skipped — solve it later to unlock bonus content'}
+      //   </div>
+      // ) : 
+      (
         <form onSubmit={handleSubmit} className="flex flex-wrap items-center gap-2">
           <span className="text-terminal-green">{'>'}</span>
           <input
@@ -108,13 +108,13 @@ export default function ChallengeBox({
           >
             [SUBMIT]
           </button>
-          <button
+          {/* <button
             type="button"
             onClick={() => setSkipped(true)}
             className="text-terminal-green-muted text-xs hover:text-terminal-green-dim transition-colors tracking-widest"
           >
             [skip →]
-          </button>
+          </button> */}
           {error && (
             <div className="w-full text-terminal-red text-xs mt-2">{error}</div>
           )}

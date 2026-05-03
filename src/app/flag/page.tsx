@@ -40,14 +40,21 @@ unsupervised access to Arush Bodla's brain.
 // TODO: personal note — write something genuine here
 // TODO: optional — a recommendation (book, CTF, CF problem set)`}
                 </div>
+                <a
+                  href="mailto:arushbodla@gmail.com?subject=[flag submission] i got here"
+                  className="mt-6 inline-block border border-terminal-amber text-terminal-amber text-xs tracking-widest px-4 py-2 hover:bg-terminal-amber hover:text-terminal-bg transition-colors"
+                >
+                  [LET ARUSH KNOW →]
+                </a>
               </TerminalBox>
 
-              <a
-                href="mailto:TODO@email.com?subject=[flag submission] i got here"
-                className="inline-block border border-terminal-amber text-terminal-amber text-xs tracking-widest px-4 py-2 hover:bg-terminal-amber hover:text-terminal-bg transition-colors"
-              >
-                [SUBMIT FLAG →]
-              </a>
+
+
+              <TerminalBox label="// MY_INSPIRATIONS">
+                <div className="text-terminal-white text-sm leading-relaxed whitespace-pre-line">
+                  // TODO: books, hobbies, people, some favorite problems
+                </div>
+              </TerminalBox>
             </div>
           </section>
         )}

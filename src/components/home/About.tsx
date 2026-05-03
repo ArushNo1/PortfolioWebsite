@@ -5,12 +5,10 @@ interface AboutProps {
 }
 
 const vitals: Array<[string, string]> = [
-  ['UNIT', 'ACES Cyber LLC'],
-  ['SCHOLARSHIP', 'Banneker/Key Full Ride'],
   ['INSTITUTION', 'University of Maryland'],
+  ['UNIT', 'ACES Cyber LLC'],
   ['STATUS', 'Incoming · Fall 2026'],
   ['LANGUAGES', 'C++, Python, Rust, Java, JS'],
-  ['COMPETITIONS', 'picoCTF · LM CyberQuest · ICPC'],
 ]
 
 export default function About({ id }: AboutProps) {

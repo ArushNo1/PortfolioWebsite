@@ -2,9 +2,6 @@
 
 import ChallengeBox from '@/components/challenges/ChallengeBox'
 import {
-  TIER1_HINT,
-  TIER2_HINT,
-  TIER3_HINT,
   TIER1_FLAG,
   TIER2_FLAG,
   TIER3_FLAG,
@@ -16,7 +13,6 @@ import {
   TIER3_UNLOCK_LABEL,
   TIER2_PLAINTEXT,
   TIER3_PLAINTEXT,
-  TIER3_PYTHON_SNIPPET,
 } from '@/data/challenges'
 import {
   TIER1_CIPHER,
@@ -44,7 +40,6 @@ export default function ChallengeSection({ id }: ChallengeSectionProps) {
           <ChallengeBox
             tier={1}
             label="CHALLENGE_01 // IDENTITY VERIFICATION"
-            hint={TIER1_HINT}
             ciphertext={TIER1_CIPHER}
             flag={TIER1_FLAG}
             storageKey={TIER1_KEY}
@@ -54,8 +49,7 @@ export default function ChallengeSection({ id }: ChallengeSectionProps) {
           />
           <ChallengeBox
             tier={2}
-            label="CHALLENGE_02 // OPERATION CLASSIFICATION"
-            hint={TIER2_HINT}
+            label="CHALLENGE_02 // TEAM AFFILIATION"
             ciphertext={TIER2_CIPHER}
             flag={TIER2_FLAG}
             storageKey={TIER2_KEY}
@@ -65,15 +59,13 @@ export default function ChallengeSection({ id }: ChallengeSectionProps) {
           />
           <ChallengeBox
             tier={3}
-            label="CHALLENGE_03 // SUBJECT_MOTIVATION — CLASSIFIED"
-            hint={TIER3_HINT}
+            label="CHALLENGE_03 // OPERATION INTEGRITY"
             ciphertext={TIER3_CIPHER}
             flag={TIER3_FLAG}
             storageKey={TIER3_KEY}
             unlockLabel={TIER3_UNLOCK_LABEL}
             unlockHref="/flag"
             acceptedAnswers={[normalizeAnswer(TIER3_PLAINTEXT)]}
-            extraNote={TIER3_PYTHON_SNIPPET}
           />
         </div>
       </div>

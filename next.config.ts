@@ -1,11 +1,12 @@
 import type { NextConfig } from 'next'
 import createMDX from '@next/mdx'
 import remarkGfm from 'remark-gfm'
+import remarkFrontmatter from 'remark-frontmatter'
 import rehypeHighlight from 'rehype-highlight'
 
 const withMDX = createMDX({
   options: {
-    remarkPlugins: [remarkGfm],
+    remarkPlugins: [remarkGfm, remarkFrontmatter],
     rehypePlugins: [rehypeHighlight],
   },
 })

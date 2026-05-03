@@ -7,6 +7,7 @@ import ChallengeGate from '@/components/challenges/ChallengeGate'
 import TerminalBox from '@/components/ui/TerminalBox'
 import { deadProjects } from '@/data/graveyard'
 import { TIER2_KEY } from '@/data/challenges'
+import Image from 'next/image'
 
 export default function GraveyardPage() {
   const [state, setState] = useState<'checking' | 'locked' | 'unlocked'>('checking')
@@ -35,13 +36,22 @@ export default function GraveyardPage() {
                     key={p.id}
                     label={`INCIDENT_REPORT_00${i + 1}`}
                   >
-                    <dl className="space-y-3">
-                      <Row k="PROJECT" v={p.name} />
-                      <Row k="STATUS" v={p.status} />
-                      <Row k="STACK" v={p.stack.join(' · ')} />
-                      <Row k="CAUSE" v={p.cause} />
-                      <Row k="LEARNED" v={p.learned} />
-                    </dl>
+                    <div className='space-y-3 flex flex-row'>
+                      <dl className="space-y-3">
+                        <Row k="PROJECT" v={p.name} />
+                        <Row k="STATUS" v={p.status} />
+                        <Row k="STACK" v={p.stack.join(' · ')} />
+                        <Row k="CAUSE" v={p.cause} />
+                        <Row k="LEARNED" v={p.learned} />
+                      </dl>
+                      {p.image && (
+                        <Image
+                        src={p.image ?? '/xlchess.png'}
+                        alt={`${p.name} screenshot`}
+                        width={300}
+                        height={200}
+                      />)}
+                    </div>
                   </TerminalBox>
                 ))}
               </div>

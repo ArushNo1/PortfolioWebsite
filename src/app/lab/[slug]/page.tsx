@@ -46,7 +46,7 @@ export default function LabPostPage({ params }: PageProps) {
           >
             [← BACK TO LAB]
           </Link>
-          <article className="prose prose-invert mt-8 text-terminal-white">
+          <article className="prose prose-terminal max-w-none mt-8">
             {Post ? <Post /> : <div className="text-terminal-green-muted text-xs">{'// loading...'}</div>}
           </article>
         </div>

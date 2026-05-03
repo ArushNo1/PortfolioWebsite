@@ -1,0 +1,264 @@
+---
+title: 'MDX Reference — Full Feature Demo'
+date: '2026-05-03'
+description: 'Every syntax element available in posts: GFM, code highlighting, tables, task lists, and inline JSX.'
+published: false
+---
+
+# MDX Reference
+
+This post is a living reference for everything you can use when writing posts in `/lab`. It covers standard Markdown, GitHub Flavored Markdown (GFM) extras, syntax-highlighted code blocks, and inline JSX.
+
+---
+
+## Headings
+
+```
+# h1 — page title, use once
+## h2 — major section
+### h3 — subsection
+#### h4 — minor heading
+```
+
+# h1
+## h2
+### h3
+#### h4
+
+---
+
+## Text Formatting
+
+Plain paragraph text renders as `<p>`.
+
+**Bold** uses `**double asterisks**`.
+_Italic_ uses `_underscores_` or `*single asterisks*`.
+**_Bold italic_** combines both.
+~~Strikethrough~~ uses `~~tildes~~` (GFM).
+
+Inline `code` uses single backticks.
+
+---
+
+## Links
+
+[External link](https://arushbodla.vercel.app) — standard markdown syntax.
+
+Bare URLs are auto-linked by GFM: https://github.com/ArushNo1
+
+---
+
+## Blockquotes
+
+> Single-level blockquote. Good for callouts, warnings, or quotes.
+
+> Nested:
+> > Second level. Rarely needed, but works.
+
+---
+
+## Lists
+
+Unordered:
+
+- Item one
+- Item two
+  - Nested item (two spaces indent)
+  - Another nested item
+- Item three
+
+Ordered:
+
+1. First
+2. Second
+3. Third
+   1. Sub-item
+   2. Sub-item
+
+### Task Lists (GFM)
+
+- [x] Completed task
+- [x] Another done item
+- [ ] Pending task
+- [ ] Not started yet
+
+---
+
+## Code Blocks
+
+Fenced code blocks with a language tag get syntax highlighted by `rehype-highlight`.
+
+### Python
+```python
+def xor_decrypt(data: bytes, key: int) -> str:
+    return ''.join(chr(b ^ key) for b in data)
+
+ciphertext = bytes.fromhex("32 11 15 15 10".replace(" ", ""))
+print(xor_decrypt(ciphertext, 0x42))
+```
+
+### TypeScript
+```typescript
+interface PostMeta {
+  slug: string
+  title: string
+  date: string
+  description: string
+  published: boolean
+}
+
+function filterPublished(posts: PostMeta[]): PostMeta[] {
+  return posts
+    .filter(p => p.published)
+    .sort((a, b) => b.date.localeCompare(a.date))
+}
+```
+
+### C++
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    vector<int> dp(n + 1, 0);
+    for (int i = 1; i <= n; i++) {
+        dp[i] = dp[i - 1] + i;
+    }
+    cout << dp[n] << "\n";
+    return 0;
+}
+```
+
+### Bash
+```bash
+# Build and deploy
+npm run build
+vercel --prod
+
+# Decode a hex string
+echo "32 11 15 15 10" | xxd -r -p
+```
+
+### JSON
+```json
+{
+  "status": "alive",
+  "subject": "AB",
+  "hint": "check /robots.txt"
+}
+```
+
+### Plain text (no highlighting)
+```
+no language tag = no highlighting
+useful for terminal output, flags, raw data
+FLAG{y0u_actually_did_it}
+```
+
+---
+
+## Tables (GFM)
+
+| Cipher | Input | Output |
+|---|---|---|
+| ROT13 | `ARUSH BODLA` | `NEHFU OBQYN` |
+| Base64×2 | `the dp demons` | `ZEdWd0lHQndJR1JsYlc5dWN3PT0=` |
+| XOR 0x42 | `proof by ac` | `32 11 15 15 10 40 28 11 40 23 21` |
+
+Column alignment:
+
+| Left | Center | Right |
+|:---|:---:|---:|
+| aligned left | centered | aligned right |
+| text | text | text |
+
+---
+
+## Horizontal Rules
+
+Three or more dashes on their own line:
+
+---
+
+---
+
+## Images
+
+Standard markdown image syntax renders as a raw `<img>` tag. Next.js's `<Image>` optimization does **not** apply inside MDX unless you import it explicitly.
+
+```mdx
+![Alt text](/MyImage.png)
+```
+
+To use `<Image>` with optimization, import it inline (MDX supports this):
+
+```mdx
+import Image from 'next/image'
+
+<Image src="/MyImage.png" alt="Description" width={800} height={400} />
+```
+
+---
+
+## Inline JSX
+
+Because this is MDX (not plain Markdown), you can write JSX directly in the file.
+
+### Expressions
+The current year is {new Date().getFullYear()}.
+Two plus two is {2 + 2}.
+
+### Inline HTML / JSX elements
+
+<span style={{ color: '#4aff4a', fontFamily: 'monospace' }}>Green monospace text via inline style</span>
+
+A `<kbd>` element for keyboard shortcuts: press <kbd>Ctrl</kbd> + <kbd>C</kbd>.
+
+**`<details>/<summary>` MDX quirk:** MDX's markdown parser wraps children of JSX blocks in `<p>` tags, which makes `<summary>` end up as `<p><summary>` — invalid HTML that crashes with a hydration error. The workaround is to put everything on one line with no blank lines inside the block:
+
+<details><summary>Expandable — click to reveal</summary>This works because there are no blank lines inside the JSX block, so the markdown parser doesn't create paragraph wrappers.</details>
+
+### Conditional rendering (JSX expression)
+
+{true && <span style={{ color: '#ffaa00' }}>This renders because the condition is true.</span>}
+
+{false && <span>This never appears.</span>}
+
+### Importing React components
+
+You can import any component available in the project:
+
+```mdx
+import TerminalBox from '@/components/ui/TerminalBox'
+
+<TerminalBox label="// DEMO">
+  This is a TerminalBox rendered inside a blog post.
+</TerminalBox>
+```
+
+This works at build time. The component must be a valid React component and must not rely on `"use client"` behavior that conflicts with the MDX compilation context.
+
+---
+
+## What You Cannot Do
+
+- **Dynamic imports** (`dynamic(() => import(...))`) inside MDX — the file itself is already dynamically imported
+- **`useEffect` / `useState`** directly in the MDX file — it's not a client component. Wrap stateful logic in an imported component instead.
+- **Access frontmatter fields** inside the post body — the YAML block is stripped by `remark-frontmatter`. If you need the title in the body, write it explicitly or set up `remark-mdx-frontmatter`.
+
+---
+
+## Frontmatter Reference
+
+The YAML block at the top of each post (between `---` delimiters) is never rendered. It feeds the `/lab` post list via `gray-matter`.
+
+```yaml
+---
+title: 'Post Title'           # shown in the post list
+date: 'YYYY-MM-DD'            # used for sorting; newest first
+description: 'One sentence.'  # shown in the post list
+published: true               # false = draft, hidden from list
+---
+```

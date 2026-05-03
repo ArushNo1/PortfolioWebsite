@@ -1,5 +1,3 @@
-// Encoding utilities. Do not edit unless you know what you're doing.
-
 import {
   TIER1_PLAINTEXT,
   TIER2_PLAINTEXT,

@@ -24,7 +24,32 @@ export default {
           white: '#c8ffc8',
         },
       },
+      typography: ({ theme }: { theme: (path: string) => string }) => ({
+        terminal: {
+          css: {
+            '--tw-prose-body': theme('colors.terminal.white'),
+            '--tw-prose-headings': theme('colors.terminal.green'),
+            '--tw-prose-lead': theme('colors.terminal.green-dim'),
+            '--tw-prose-links': theme('colors.terminal.amber'),
+            '--tw-prose-bold': theme('colors.terminal.white'),
+            '--tw-prose-counters': theme('colors.terminal.green-dim'),
+            '--tw-prose-bullets': theme('colors.terminal.green-dim'),
+            '--tw-prose-hr': theme('colors.terminal.border'),
+            '--tw-prose-quotes': theme('colors.terminal.green-dim'),
+            '--tw-prose-quote-borders': theme('colors.terminal.border'),
+            '--tw-prose-captions': theme('colors.terminal.green-muted'),
+            '--tw-prose-code': theme('colors.terminal.green'),
+            '--tw-prose-pre-code': theme('colors.terminal.white'),
+            '--tw-prose-pre-bg': theme('colors.terminal.surface'),
+            '--tw-prose-th-borders': theme('colors.terminal.border'),
+            '--tw-prose-td-borders': theme('colors.terminal.border-dim'),
+          },
+        },
+      }),
     },
   },
-  plugins: [require('tailwind-scrollbar-hide')],
+  plugins: [
+    require('tailwind-scrollbar-hide'),
+    require('@tailwindcss/typography'),
+  ],
 } satisfies Config;
