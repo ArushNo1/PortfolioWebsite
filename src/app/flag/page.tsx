@@ -52,7 +52,9 @@ unsupervised access to Arush Bodla's brain.
 
               <TerminalBox label="// MY_INSPIRATIONS">
                 <div className="text-terminal-white text-sm leading-relaxed whitespace-pre-line">
-                  // TODO: books, hobbies, people, some favorite problems
+                  <p>
+                    TODO: books, hobbies, people, some favorite problems
+                  </p>
                 </div>
               </TerminalBox>
             </div>
