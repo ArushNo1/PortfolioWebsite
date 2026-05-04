@@ -71,7 +71,6 @@ export default function ChallengeBox({
             {extraNote}
           </pre>
         )}
-        {/* <div className="text-terminal-green-dim text-xs mt-2">{hint}</div> */}
       </div>
 
       {solved ? (

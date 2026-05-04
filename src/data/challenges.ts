@@ -23,7 +23,7 @@ export const TIER3_PLAINTEXT = 'proof by ac'
 
 // TIER 3 hint shown below the ciphertext
 // Include the python decode snippet below the hint
-//export const TIER3_HINT = 'HINT: XOR, key 0x42. Hex encoded.'
+export const TIER3_HINT = 'It always ends in (ac)cepted'
 //export const TIER3_PYTHON_SNIPPET = "# python: bytes([b ^ 0x42 for b in bytes.fromhex('CIPHERTEXT_HERE')]).decode()"
 
 // What gets displayed after each challenge is solved

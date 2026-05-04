@@ -13,6 +13,7 @@ import {
   TIER3_UNLOCK_LABEL,
   TIER2_PLAINTEXT,
   TIER3_PLAINTEXT,
+  TIER3_HINT,
 } from '@/data/challenges'
 import {
   TIER1_CIPHER,
@@ -66,6 +67,7 @@ export default function ChallengeSection({ id }: ChallengeSectionProps) {
             unlockLabel={TIER3_UNLOCK_LABEL}
             unlockHref="/flag"
             acceptedAnswers={[normalizeAnswer(TIER3_PLAINTEXT)]}
+            extraNote={TIER3_HINT}
           />
         </div>
       </div>
