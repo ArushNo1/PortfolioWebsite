@@ -36,8 +36,7 @@ export default function Hero({ id }: HeroProps) {
 
           <div className="text-terminal-amber text-sm space-y-1 mb-10">
             {/* TODO: one line, first person, no "passionate developer" language */}
-            <p>{'> TODO: one line, first person, no "passionate developer" language'}</p>
-            <p>{'> Competitive programmer. CTF player. Ships things.'}</p>
+            <p>{'> One line, first person, no "passionate developer" language'}</p>
           </div>
 
           <div className="flex flex-wrap gap-4">

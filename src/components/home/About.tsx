@@ -18,9 +18,7 @@ export default function About({ id }: AboutProps) {
         <TerminalBox label="// SUBJECT_PROFILE">
           <p className="text-terminal-white text-sm leading-relaxed whitespace-pre-line">
             {/* TODO preserved verbatim */}
-            {`TODO: 3–4 sentences bio. First person. Direct. No filler.
-No "passionate developer". No "4+ years experience".
-Just what you actually do and care about.`}
+            {`I had something here about not optimizing for the resume.`}
           </p>
         </TerminalBox>
 
