@@ -1,22 +1,7 @@
 # arushbodla.vercel.app
 
-Personal portfolio site. Next.js 15 App Router, TypeScript, Tailwind CSS. Terminal/hacker aesthetic with a three-tier CTF challenge system built in.
-
 Live: **https://arushbodla.vercel.app**
 
----
-
-## What's Here
-
-Beyond a standard portfolio, the site has a layered challenge system hidden on the home page. Solving each tier unlocks a new section:
-
-| Tier | Cipher | Unlocks |
-|---|---|---|
-| 1 | ROT13 | `/lab` — notes and writeups |
-| 2 | Double Base64 | `/graveyard` — abandoned project post-mortems |
-| 3 | XOR + hex encoding | `/flag` — completion certificate |
-
-There are also easter eggs outside the main challenge path — check the page source and API routes.
 
 ---
 
@@ -29,47 +14,6 @@ There are also easter eggs outside the main challenge path — check the page so
 - **Email:** Nodemailer (Gmail SMTP)
 - **Fonts:** Geist Mono (primary), Geist Sans
 - **Deployment:** Vercel
-
----
-
-## Local Development
-
-```bash
-npm install
-npm run dev
-```
-
-Create `.env.local`:
-```
-EMAIL_USER=your@gmail.com
-EMAIL_PASSWORD=your-app-password
-RECIPIENT_EMAIL=inbox@example.com
-```
-
-Use a Gmail App Password, not your account password.
-
----
-
-## Project Structure
-
-```
-src/
-  app/               → Pages and API routes
-  components/        → UI components organized by domain
-    nav/             → Navbar
-    ui/              → TerminalBox, FlagBadge, Footer
-    home/            → Hero, About, Skills, ChallengeSection
-    challenges/      → ChallengeBox, ChallengeGate
-    projects/        → ProjectCard
-    lab/             → PostList
-    contact/         → Contact
-  data/              → Static content (projects, skills, challenges, graveyard)
-  lib/               → Crypto utilities, MDX post loader
-  content/posts/     → MDX blog posts
-public/              → Images and static assets
-```
-
-Full developer guide (component map, styling conventions, challenge system internals): [`.claude/CLAUDE.md`](.claude/CLAUDE.md)
 
 ---
 
