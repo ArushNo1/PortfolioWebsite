@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { socialLinks } from '@/data/socials'
 
 const links = [
   { label: 'PROFILE', href: '/#home' },
@@ -22,39 +23,57 @@ export default function Navbar() {
           <span className="blink text-terminal-green">▌</span>
         </div>
 
-        <div className="hidden md:flex items-center gap-6">
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className="text-terminal-green-dim text-xs tracking-widest hover:text-terminal-green transition-colors"
+        <div className="flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-6">
+            {links.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="text-terminal-green-dim text-xs tracking-widest hover:text-terminal-green transition-colors"
+              >
+                {l.label}
+              </Link>
+            ))}
+          </div>
+
+          <div className="hidden lg:flex items-center gap-3 pl-6 border-l border-terminal-border">
+            {socialLinks.map(({ href, label, Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                title={label}
+                className="text-terminal-green-dim hover:text-terminal-green transition-colors"
+              >
+                <Icon size={16} />
+              </a>
+            ))}
+          </div>
+
+          <div className="hidden md:block">
+            <a
+              href="/Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border border-terminal-amber text-terminal-amber text-xs tracking-widest px-3 py-1 hover:bg-terminal-amber hover:text-terminal-bg transition-colors"
             >
-              {l.label}
-            </Link>
-          ))}
-        </div>
+              [RESUME.PDF]
+            </a>
+          </div>
 
-        <div className="hidden md:block">
-          <a
-            href="/Resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border border-terminal-amber text-terminal-amber text-xs tracking-widest px-3 py-1 hover:bg-terminal-amber hover:text-terminal-bg transition-colors"
+          <button
+            type="button"
+            aria-label="Toggle menu"
+            className="md:hidden flex flex-col gap-1 p-2"
+            onClick={() => setMenuOpen((o) => !o)}
           >
-            [RESUME.PDF]
-          </a>
+            <span className="block w-5 h-px bg-terminal-green" />
+            <span className="block w-5 h-px bg-terminal-green" />
+            <span className="block w-5 h-px bg-terminal-green" />
+          </button>
         </div>
-
-        <button
-          type="button"
-          aria-label="Toggle menu"
-          className="md:hidden flex flex-col gap-1 p-2"
-          onClick={() => setMenuOpen((o) => !o)}
-        >
-          <span className="block w-5 h-px bg-terminal-green" />
-          <span className="block w-5 h-px bg-terminal-green" />
-          <span className="block w-5 h-px bg-terminal-green" />
-        </button>
       </div>
 
       {menuOpen && (
