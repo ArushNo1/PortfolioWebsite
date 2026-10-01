@@ -18,7 +18,7 @@ export default {
           'border-bright': '#2a4e2a',
           green: '#4aff4a',
           'green-dim': '#6aaa6a',
-          'green-muted': '#3a6e3a',
+          'green-muted': '#4f8a4f',
           amber: '#ffaa00',
           red: '#ff4444',
           white: '#c8ffc8',

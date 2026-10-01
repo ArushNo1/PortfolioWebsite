@@ -8,6 +8,18 @@ export interface Project {
   image: string | null
   featured: boolean
   event: string | null
+  archive?: boolean               // compact list row, no image
+  tagline?: string                // one-line hook shown on the card (falls back to description)
+  award?: string                  // e.g. "2nd Overall" — rendered as a badge
+  problem?: string                // hover/expand details
+  approach?: string
+  result?: string
+  highlights?: string[]
+  imageFit?: 'cover' | 'contain'  // use 'contain' for low-res or logo-style images
+}
+
+export function hasUrl(v: string | null): v is string {
+  return !!v && !v.startsWith('TODO')
 }
 
 // Images must exist in public/ for next/image to serve them.
@@ -15,46 +27,109 @@ export const projects: Project[] = [
   {
     id: 'regimon',
     name: 'RegiMon',
-    tags: ['Rust', 'Win32', 'Registry'],
+    tags: ['Rust', 'Tauri', 'Win32', 'Registry'],
     description: 'A Windows Registry monitoring tool that detects and alerts on suspicious changes in real time. Prevents exploits in the RAM copy of the Registry.',
+    tagline: 'Real-time Windows Registry monitor that catches the in-memory persistence your antivirus misses.',
+    problem: 'On-disk antivirus scanning misses registry changes made in memory, which any sufficiently privileged process is allowed to do.',
+    approach: 'A Rust + Tauri backend subscribes to Win32 RegNotifyChangeKeyValue for event-driven detection across a 25-key default set scoped with MITRE ATT&CK. A React UI shows changes and rolls any of them back in one click.',
+    result: 'Sub-50ms detection and under 1% CPU while watching 50 keys. Detected and reverted the LoveBug virus\'s persistence changes, which Windows Defender did not flag.',
+    highlights: [
+      'Zero polling: event-driven change notifications',
+      'Recursive tracking of modified, added and deleted subkeys',
+      'Detects admin elevation and prompts for HKLM/HKCR keys',
+      'GitHub Actions builds and publishes Windows releases',
+    ],
     github: 'https://github.com/ArushNo1/RegiMon',
     website: null,
-    image: "/RegiMon.png",
+    image: '/RegiMon.png',
     featured: true,
     event: null,
   },
   {
-    id: "acl-oj",
-    name: "ACL Online Judge",
-    tags: ["Supabase", "Next.js", "Judge0"],
-    description: "An online judge platform built for the ACL Informatics Tournament. Built to be used without internet access to prevent cheating.",
-    github: "https://github.com/ArushNo1/acl-online-judge",
-    website: "https://acl-oj.vercel.app",
-    image: "/ACL-OJ.png",
-    featured: false,
+    id: 'nexus',
+    name: 'Nexus',
+    tags: ['React', 'LangGraph', 'Supabase', 'DigitalOcean'],
+    description: 'An AI-agent powered system for converting boring lecture materials such as slides and PDFs into engaging videos and playable games.',
+    tagline: 'Multi-agent AI that turns a student\'s learning gap into a playable game in 3-5 minutes.',
+    award: 'Best Education',
+    problem: 'Lecture slides and PDFs are passive. Students need to practice the exact concept they are missing.',
+    approach: 'A 7-node LangGraph pipeline (design, plan, develop, evaluate) on a DigitalOcean droplet behind FastAPI generates the game, a Remotion + ElevenLabs tutorial video, and themed assets.',
+    result: 'Won Best Education at PatriotHacks 2026.',
+    highlights: [
+      'Game templates (Tower Defense, Quiz Runner, RPG) keep agents from generating arbitrary code',
+      'RAG over Kaplay.js docs gives agents type-checking context and fewer syntax errors',
+      'Role-based access enforced server-side after client-only checks proved bypassable',
+      'Next.js, Supabase, Remotion and LangGraph joined through designed APIs',
+    ],
+    github: 'https://github.com/ArushNo1/nexus',
+    website: 'https://nexus.cognicade.org',
+    image: '/Nexus-UI.png',
+    imageFit: 'contain',
+    featured: true,
+    event: 'HackFax x PatriotHacks 2026',
+  },
+  {
+    id: '67-racer',
+    name: '67 Racer',
+    tags: ['MQTT', 'AWS DeepRacer', 'PyTorch'],
+    description: 'Train a model to drive a robot and match your style. Then watch as the AI beats you at your own game.',
+    tagline: 'A CNN learns your driving from hand gestures, then pilots a real AWS DeepRacer in your style.',
+    award: '2nd Overall',
+    problem: 'The official DeepRacer tooling is built for AWS-managed racing, not for cloning a person\'s driving locally.',
+    approach: 'A CNN trains on live hand-gesture driving input, in simulation and on hardware. The deprecated DeepRacer web API was reverse-engineered to get direct ROS 2 control of the car.',
+    result: 'Placed 2nd overall at AcademiesHacks 2026, driving two physical DeepRacers live on the contest TV.',
+    highlights: [
+      'Dual-mode: virtual simulation and physical driving',
+      'Assembled and flashed two DeepRacers with custom Ubuntu images',
+      'Recovered live from a school WiFi ban, dead battery packs and Python version conflicts',
+    ],
+    github: 'https://github.com/ArushNo1/ghost-racer',
+    website: 'https://ghost-racer.vercel.app',
+    image: '/67Racer.png',
+    featured: true,
+    event: 'AcademiesHacks 2026',
+  },
+  {
+    id: 'acl-oj',
+    name: 'ACL Online Judge',
+    tags: ['Supabase', 'Next.js', 'Judge0', 'Docker'],
+    description: 'An online judge platform built for the ACL Informatics Tournament. Built to be used without internet access to prevent cheating.',
+    tagline: 'Offline-first competitive programming judge that runs entirely on a LAN.',
+    problem: 'Contestants can reach AI tools unless organizers lock down every machine, and a tournament can\'t depend on internet access.',
+    approach: 'Next.js 15 and a self-hosted Supabase stack run from Docker Compose, with Judge0 sandboxing Python, C++ and Java submissions. Verdicts are pushed over Supabase Realtime instead of polled.',
+    result: '~1.5s average verdict across 87 test submissions from 10 concurrent users. UI updates dropped from ~1s polling to under 200ms.',
+    highlights: [
+      'Codeforces-style rating system and leaderboard',
+      'KaTeX-rendered problem statements with sample I/O',
+      'Timed contests with upcoming, live and ended states',
+      'Admin panel for problem, contest and test-data management',
+    ],
+    github: 'https://github.com/ArushNo1/acl-online-judge',
+    website: 'https://acl-oj.vercel.app',
+    image: '/ACL-OJ.png',
+    featured: true,
     event: null,
   },
   {
-    id: "67-racer",
-    name: "67 Racer",
-    tags: ["MQTT", "AWS DeepRacer", "PyTorch"],
-    description: "Train a model to drive a robot and match your style. Then watch as the AI beats you at your own game.",
-    github: "https://github.com/ArushNo1/ghost-racer",
-    website: "https://ghost-racer.vercel.app",
-    image: "/67Racer.png",
-    featured: false,
-    event: "AcademiesHacks 2026",
-  },
-  {
-    id: "nexus",
-    name: "Nexus",
-    tags: ["React", "LangGraph", "DigitalOcean"],
-    description: "An AI-agent powered system for converting boring lecture materials such as slides and PDFs into engaging videos and playable Phaser.js games.",
-    github: "https://github.com/ArushNo1/nexus",
-    website: "https://nexus.cognicade.org",
-    image: "/Nexus-UI.png",
-    featured: false,
-    event: "HackFax x PatriotHacks 2026",
+    id: 'ecospark',
+    name: 'EcoSpark',
+    tags: ['Unity', 'C#'],
+    description: 'An educational game about sustainability and energy resources. Players build and manage their own eco-friendly city while serving as mayor.',
+    tagline: 'Run a city as mayor for 30 days, balancing eco score against public approval.',
+    problem: 'Make the trade-offs of sustainability and energy resources something players learn by playing.',
+    approach: 'A Unity/C# city builder where players move their city onto renewable energy while managing a five-currency economy and a research tree.',
+    highlights: [
+      'Wave function collapse generates the city\'s tiles under neighbor constraints',
+      'Research tree modeled as a prerequisite dependency graph',
+      'Owned shared code architecture that every Unity scene depended on',
+      'Solved line-ending asset corruption and multi-person scene merge conflicts',
+    ],
+    github: 'https://github.com/CognicadeStudios/EcoSpark',
+    website: 'https://cognicadestudios.github.io/EcoSparkGame/',
+    image: '/ecospark.png',
+    imageFit: 'contain',
+    featured: true,
+    event: 'Congressional App Challenge 2024',
   },
   {
     id: 'winter-warzone',
@@ -64,29 +139,24 @@ export const projects: Project[] = [
     github: 'https://github.com/2900xt/WinterWarzone',
     website: null,
     image: '/WinterWarzone.webp',
-    featured: true,
-    event: "100 Coders v. MIT Student",
-  },
-  {
-    id: 'ecospark',
-    name: 'EcoSpark',
-    tags: ['Unity', 'C#'],
-    description: 'An educational game about sustainability and energy resources. Players build and manage their own eco-friendly city while serving as mayor.',
-    github: 'https://github.com/CognicadeStudios/EcoSpark',
-    website: "https://cognicadestudios.github.io/EcoSparkGame/",
-    image: '/ecospark.png',
-    featured: true,
-    event: "Congressional App Challenge 2024",
+    featured: false,
+    event: '100 Coders v. MIT Student',
   },
   {
     id: 'xl-chess',
     name: 'XL Chess',
     tags: ['Java', 'JavaFX'],
     description: 'Local multiplayer chess game with customizable boards and pieces. Supports grid sizes up to 14x14, and customizable time controls.',
+    highlights: [
+      'Legal-move dots, pawn promotion and insufficient-material draws',
+      'Board sizes from 4x4 to 14x14 with custom pieces and starting positions',
+      'Custom FEN parser and serializer for board setup',
+      'Built-in game clock and multi-game score tracking',
+    ],
     github: 'https://github.com/ArushNo1/XL-Chess',
     website: null,
     image: '/xlchess.png',
-    featured: true,
+    featured: false,
     event: null,
   },
   {
@@ -98,6 +168,7 @@ export const projects: Project[] = [
     website: null,
     image: '/Falcon9.png',
     featured: false,
+    archive: true,
     event: null,
   },
   {
@@ -109,6 +180,7 @@ export const projects: Project[] = [
     website: null,
     image: '/Templates.png',
     featured: false,
+    archive: true,
     event: null,
   },
   {
@@ -120,6 +192,7 @@ export const projects: Project[] = [
     website: null,
     image: '/StrategicTicTacToe.png',
     featured: false,
+    archive: true,
     event: null,
   },
   {
@@ -131,6 +204,7 @@ export const projects: Project[] = [
     website: null,
     image: '/WinterScene.png',
     featured: false,
+    archive: true,
     event: null,
   },
   {
@@ -142,6 +216,7 @@ export const projects: Project[] = [
     website: 'https://arushbodla.org',
     image: '/PortfolioSite.png',
     featured: false,
+    archive: true,
     event: null,
   },
 ]

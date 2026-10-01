@@ -1,23 +1,7 @@
-import { securitySkills, devSkills } from '@/data/skills'
+import { skillGroups } from '@/data/skills'
 
 interface SkillsProps {
   id?: string
-}
-
-function SkillList({ skills }: { skills: string[] }) {
-  return (
-    <div>
-      {skills.map((skill) => (
-        <div
-          key={skill}
-          className="flex items-center gap-3 py-2 border-b border-terminal-border-dim text-sm text-terminal-white"
-        >
-          <span className="text-terminal-green text-xs">▸</span>
-          {skill}
-        </div>
-      ))}
-    </div>
-  )
 }
 
 export default function Skills({ id }: SkillsProps) {
@@ -27,19 +11,31 @@ export default function Skills({ id }: SkillsProps) {
         <div className="text-terminal-green text-xs tracking-widest mb-8">
           {'// TACTICS_TECHNIQUES_PROCEDURES'}
         </div>
-        <div className="grid md:grid-cols-2 gap-8">
-          <div>
-            <div className="text-terminal-green-muted text-xs tracking-widest mb-4">
-              {'// OFFENSIVE / SECURITY'}
+
+        <div className="space-y-8">
+          {skillGroups.map((group) => (
+            <div key={group.label}>
+              <div className="text-terminal-green-muted text-xs tracking-widest mb-3">
+                {group.label}
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+                {group.skills.map(({ name, detail, Icon }) => (
+                  <div
+                    key={name}
+                    className="flex items-center gap-3 px-4 py-3 border border-terminal-border bg-terminal-surface hover:border-terminal-border-bright transition-colors duration-200"
+                  >
+                    <Icon size={18} className="text-terminal-green shrink-0" aria-hidden />
+                    <div className="min-w-0">
+                      <div className="text-terminal-white text-sm">{name}</div>
+                      {detail && (
+                        <div className="text-terminal-green-muted text-xs mt-0.5">{detail}</div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-            <SkillList skills={securitySkills} />
-          </div>
-          <div>
-            <div className="text-terminal-green-muted text-xs tracking-widest mb-4">
-              {'// DEVELOPMENT'}
-            </div>
-            <SkillList skills={devSkills} />
-          </div>
+          ))}
         </div>
       </div>
     </section>

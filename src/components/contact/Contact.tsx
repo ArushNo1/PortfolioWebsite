@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 // Email displayed as hex bytes with a [decode] button
 // On click: convert hex to ASCII string, replace display with mailto link
 // Encode your actual email in hex — update the hex string here:
-const EMAIL_HEX = '61 72 75 73 68 62 6f 64 6c 61 40 67 6d 61 69 6c 2e 63 6f 6d'
+const EMAIL_HEX = '61 62 6f 64 6c 61 40 75 6d 64 2e 65 64 75'
 // e.g. 'a@b.com' → '61 40 62 2e 63 6f 6d'
 
 function decodeHex(hex: string): string {

@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { socialLinks } from '@/data/socials'
 
@@ -14,6 +15,12 @@ const links = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const pathname = usePathname()
+  const isActive = (href: string) => !href.includes('#') && pathname.startsWith(href)
+  const linkClass = (href: string) =>
+    `text-xs tracking-widest transition-colors ${
+      isActive(href) ? 'text-terminal-green' : 'text-terminal-green-dim hover:text-terminal-green'
+    }`
 
   return (
     <nav className="sticky top-0 z-50 bg-terminal-bg border-b border-terminal-border">
@@ -29,9 +36,10 @@ export default function Navbar() {
               <Link
                 key={l.href}
                 href={l.href}
-                className="text-terminal-green-dim text-xs tracking-widest hover:text-terminal-green transition-colors"
+                aria-current={isActive(l.href) ? 'page' : undefined}
+                className={linkClass(l.href)}
               >
-                {l.label}
+                {isActive(l.href) ? `> ${l.label}` : l.label}
               </Link>
             ))}
           </div>
@@ -66,6 +74,7 @@ export default function Navbar() {
           <button
             type="button"
             aria-label="Toggle menu"
+            aria-expanded={menuOpen}
             className="md:hidden flex flex-col gap-1 p-2"
             onClick={() => setMenuOpen((o) => !o)}
           >
@@ -83,11 +92,26 @@ export default function Navbar() {
               key={l.href}
               href={l.href}
               onClick={() => setMenuOpen(false)}
-              className="text-terminal-green-dim text-xs tracking-widest hover:text-terminal-green transition-colors"
+              aria-current={isActive(l.href) ? 'page' : undefined}
+              className={linkClass(l.href)}
             >
-              {l.label}
+              {isActive(l.href) ? `> ${l.label}` : l.label}
             </Link>
           ))}
+          <div className="flex items-center gap-4">
+            {socialLinks.map(({ href, label, Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="text-terminal-green-dim hover:text-terminal-green transition-colors"
+              >
+                <Icon size={18} />
+              </a>
+            ))}
+          </div>
           <a
             href="/Resume.pdf"
             target="_blank"

@@ -41,7 +41,7 @@ unsupervised access to Arush Bodla's brain.
 // TODO: optional — a recommendation (book, CTF, CF problem set)`}
                 </div>
                 <a
-                  href="mailto:arushbodla@gmail.com?subject=[flag submission] i got here"
+                  href="mailto:abodla@umd.edu?subject=[flag submission] i got here"
                   className="mt-6 inline-block border border-terminal-amber text-terminal-amber text-xs tracking-widest px-4 py-2 hover:bg-terminal-amber hover:text-terminal-bg transition-colors"
                 >
                   [LET ARUSH KNOW →]

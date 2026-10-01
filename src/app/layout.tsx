@@ -14,6 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://arushbodla.org"),
   title: "Arush Bodla",
   description: "CS @ UMD · ACES Cyber · CTF player · Competitive programmer",
   icons: {
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Arush Bodla",
     description: "CS @ UMD · ACES Cyber · CTF player · Competitive programmer",
-    url: "https://arushbodla.vercel.app",
+    url: "https://arushbodla.org",
     type: "website",
   },
 };

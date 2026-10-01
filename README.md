@@ -1,6 +1,6 @@
-# arushbodla.vercel.app
+# arushbodla.org
 
-Live: **https://arushbodla.vercel.app**
+Live: **https://arushbodla.org**
 
 
 ---
@@ -45,7 +45,7 @@ published: true
 
 ### Cleanup
 - [ ] Uninstall dead npm packages: `emailjs`, `emailjs-com`, `next-sitemap`
-- [ ] Delete unused public assets: `file.svg`, `globe.svg`, `next.svg`, `vercel.svg`, `vite.svg`, `window.svg`, `ArushBodlaLogo.svg`, `ArushBodlaWithoutBackground-full.svg`, `Resume.pdf`
+- [ ] Delete unused public assets: `file.svg`, `globe.svg`, `next.svg`, `vercel.svg`, `vite.svg`, `window.svg`, `ArushBodlaLogo.svg`, `ArushBodlaWithoutBackground-full.svg`
 - [ ] Delete `src/components/Progressbar.tsx` (built, never imported anywhere)
 - [ ] Delete `src/assets/react.svg` (default CNA artifact, never referenced)
 
