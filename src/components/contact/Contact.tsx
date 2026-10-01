@@ -1,12 +1,15 @@
 'use client'
 
 import React, { useState } from 'react'
+import { socialLinks } from '@/data/socials'
 
-// Email displayed as hex bytes with a [decode] button
-// On click: convert hex to ASCII string, replace display with mailto link
-// Encode your actual email in hex — update the hex string here:
+// Email displayed as hex bytes with a [decode] button.
+// On click: convert hex to ASCII string, replace display with mailto link.
 const EMAIL_HEX = '61 62 6f 64 6c 61 40 75 6d 64 2e 65 64 75'
-// e.g. 'a@b.com' → '61 40 62 2e 63 6f 6d'
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+const OPEN_TO = ['internships', 'security research', 'startups', 'project ideas']
 
 function decodeHex(hex: string): string {
   try {
@@ -21,8 +24,8 @@ function decodeHex(hex: string): string {
 }
 
 export default function Contact() {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' })
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [formData, setFormData] = useState({ name: '', email: '', message: '', company: '' })
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error' | 'limited'>('idle')
   const [errors, setErrors] = useState<{ email?: string; message?: string }>({})
   const [decoded, setDecoded] = useState(false)
 
@@ -36,10 +39,11 @@ export default function Contact() {
 
     setErrors({})
 
-    if (!formData.email || !formData.message) {
-      const newErrors: { email?: string; message?: string } = {}
-      if (!formData.email) newErrors.email = 'Email is required'
-      if (!formData.message) newErrors.message = 'Message is required'
+    const newErrors: { email?: string; message?: string } = {}
+    if (!formData.email) newErrors.email = 'Email is required'
+    else if (!EMAIL_RE.test(formData.email.trim())) newErrors.email = 'Enter a valid email'
+    if (!formData.message.trim()) newErrors.message = 'Message is required'
+    if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors)
       return
     }
@@ -54,7 +58,9 @@ export default function Contact() {
 
       if (response.ok) {
         setStatus('success')
-        setFormData({ name: '', email: '', message: '' })
+        setFormData({ name: '', email: '', message: '', company: '' })
+      } else if (response.status === 429) {
+        setStatus('limited')
       } else {
         setStatus('error')
       }
@@ -67,10 +73,38 @@ export default function Contact() {
   const decodedEmail = decoded ? decodeHex(EMAIL_HEX) : ''
 
   return (
-    <section className="px-6 md:px-12 py-16" id="contact">
+    <section className="relative overflow-hidden px-6 md:px-12 py-16" id="contact">
       <div className="max-w-2xl mx-auto">
         <div className="text-terminal-green text-xs tracking-widest mb-8">
           {'// ESTABLISH_CONTACT'}
+        </div>
+
+        <div className="mb-8">
+          <p className="text-terminal-white text-sm leading-relaxed mb-3">
+            I&apos;m open to {OPEN_TO.slice(0, -1).join(', ')}, and {OPEN_TO[OPEN_TO.length - 1]}.
+            If something here caught your eye, say hi. I usually reply within a couple of days.
+          </p>
+          <div className="flex flex-wrap gap-x-5 gap-y-2">
+            {socialLinks.map(({ href, label }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-terminal-green-dim text-xs tracking-widest hover:text-terminal-green transition-colors"
+              >
+                {`[${label.toUpperCase()} →]`}
+              </a>
+            ))}
+            <a
+              href="/Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-terminal-amber text-xs tracking-widest hover:underline"
+            >
+              [RESUME.PDF →]
+            </a>
+          </div>
         </div>
 
         <div className="border border-terminal-border bg-terminal-surface p-5 mb-8">
@@ -100,7 +134,21 @@ export default function Contact() {
           )}
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} noValidate className="space-y-5">
+          {/* Honeypot: hidden from people, filled in by bots */}
+          <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+            <label htmlFor="company">Company</label>
+            <input
+              id="company"
+              type="text"
+              name="company"
+              tabIndex={-1}
+              autoComplete="off"
+              value={formData.company}
+              onChange={handleChange}
+            />
+          </div>
+
           <div>
             <label
               htmlFor="name"
@@ -124,7 +172,7 @@ export default function Contact() {
               htmlFor="email"
               className="block mb-2 text-terminal-green-muted text-xs tracking-widest"
             >
-              EMAIL
+              EMAIL <span className="text-terminal-amber">*</span>
             </label>
             <input
               id="email"
@@ -145,7 +193,7 @@ export default function Contact() {
               htmlFor="message"
               className="block mb-2 text-terminal-green-muted text-xs tracking-widest"
             >
-              MESSAGE
+              MESSAGE <span className="text-terminal-amber">*</span>
             </label>
             <textarea
               id="message"
@@ -169,15 +217,20 @@ export default function Contact() {
             [TRANSMIT →]
           </button>
 
-          {status === 'loading' && (
-            <p className="text-terminal-green-dim text-xs">{'// TRANSMITTING...'}</p>
-          )}
-          {status === 'success' && (
-            <p className="text-terminal-green text-xs">{'// MESSAGE RECEIVED'}</p>
-          )}
-          {status === 'error' && (
-            <p className="text-terminal-red text-xs">{'// TRANSMISSION FAILED — try direct email'}</p>
-          )}
+          <div role="status" aria-live="polite">
+            {status === 'loading' && (
+              <p className="text-terminal-green-dim text-xs">{'// TRANSMITTING...'}</p>
+            )}
+            {status === 'success' && (
+              <p className="text-terminal-green text-xs">{'// MESSAGE RECEIVED'}</p>
+            )}
+            {status === 'limited' && (
+              <p className="text-terminal-red text-xs">{'// RATE LIMITED — try again later or email directly'}</p>
+            )}
+            {status === 'error' && (
+              <p className="text-terminal-red text-xs">{'// TRANSMISSION FAILED — try direct email'}</p>
+            )}
+          </div>
         </form>
       </div>
     </section>

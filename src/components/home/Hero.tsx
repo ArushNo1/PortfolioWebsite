@@ -40,12 +40,6 @@ export default function Hero({ id }: HeroProps) {
               ─────────────────────────────────────────────
             </div>
 
-            <div className="text-terminal-green-dim text-sm tracking-wide space-y-1 mb-6">
-              <p>CS @ University of Maryland</p>
-              <p>ACES Cyber Honors LLC · Banneker/Key Scholar</p>
-              <p>Freshman · Class of 2030</p>
-            </div>
-
             <div className="space-y-1 mb-6 text-sm">
               <p className="text-terminal-green-muted text-xs">
                 {'> ERR: I ran out of Claude tokens generating some tagline.'}

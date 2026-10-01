@@ -2,7 +2,13 @@ import Navbar from '@/components/nav/Navbar'
 import Footer from '@/components/ui/Footer'
 import ProjectCard from '@/components/projects/ProjectCard'
 import ProjectArchive from '@/components/projects/ProjectArchive'
+import type { Metadata } from 'next'
 import { projects } from '@/data/projects'
+
+export const metadata: Metadata = {
+  title: 'Projects · Arush Bodla',
+  description: 'Security tools, hackathon wins, and side projects by Arush Bodla.',
+}
 
 const featured = projects.filter((p) => p.featured)
 const standard = projects.filter((p) => !p.featured && !p.archive)
