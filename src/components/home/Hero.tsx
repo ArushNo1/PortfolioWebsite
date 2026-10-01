@@ -6,14 +6,16 @@ interface HeroProps {
 }
 
 const credentials: Array<[string, string]> = [
-  ['BEST EDUCATION', 'PatriotHacks 2026'],
-  ['2ND OVERALL', 'AcademiesHacks 2026'],
+  ['MANTECH', 'Digital Forensics Intern, Summer 2026'],
+  ['CYBERPATRIOT', '13th of 4,787 teams nationally'],
+  ['COMPTIA', 'Security+'],
+  ['ACL-IT', 'Co-Founder & Tournament Director'],
 ]
 
 export default function Hero({ id }: HeroProps) {
   return (
     <section id={id} className="px-6 md:px-12 py-20 md:py-28">
-      <div className="max-w-6xl mx-auto">
+      <div>
         <div
           className="hero-typewriter overflow-hidden whitespace-nowrap text-terminal-green-muted text-xs tracking-widest mb-6"
           style={{ animation: 'typewriter 1.2s steps(24, end) forwards', width: 0 }}
@@ -22,7 +24,7 @@ export default function Hero({ id }: HeroProps) {
         </div>
 
         <div
-          className="fade-up flex flex-col-reverse gap-10 md:flex-row md:items-center md:justify-between"
+          className="fade-up flex flex-col-reverse gap-10 md:flex-row md:items-center md:gap-20"
           style={{ animationDelay: '1.2s', opacity: 0 }}
         >
           <div className="max-w-3xl">
@@ -59,7 +61,7 @@ export default function Hero({ id }: HeroProps) {
                   key={title}
                   className="border border-terminal-border bg-terminal-surface px-2.5 py-1 text-xs tracking-wide"
                 >
-                  <span className="text-terminal-amber">★ {title}</span>
+                  <span className="text-terminal-amber">{title}</span>
                   <span className="text-terminal-green-muted"> · {event}</span>
                 </span>
               ))}
