@@ -16,6 +16,7 @@ export interface Project {
   result?: string
   highlights?: string[]
   imageFit?: 'cover' | 'contain'  // use 'contain' for low-res or logo-style images
+  imagePosition?: 'top' | 'bottom' | 'left' | 'right' | 'center'  // card + archive thumbnails: which part of the image is kept (default 'top'), the opposite side is cropped
 }
 
 export function hasUrl(v: string | null): v is string {
@@ -24,6 +25,28 @@ export function hasUrl(v: string | null): v is string {
 
 // Images must exist in public/ for next/image to serve them.
 export const projects: Project[] = [
+  {
+    id: 'sprout',
+    name: 'Sprout',
+    tags: ['Python', 'uAgents', 'SpacetimeDB', 'Next.js', 'Vercel'],
+    description: 'A group of AI agents inside ASI:One that builds a concept map of your course, tutors you on what you\'re weakest at, and remembers you across sessions. Study live with friends in Kahoot-style and arcade games.',
+    tagline: 'Asking an LLM to teach you usually gets you a paragraph of jargon. Sprout fixes that.',
+    award: '3rd Place, Fetch.ai Track',
+    problem: 'Chat assistants start from nothing every conversation, and have no idea what you know. Students keep having to re-explain what they\'re learning and never get quizzed on the topics they\'re actually weak at.',
+    approach: 'An orchestrator and specialist agents on Fetch.ai Agentverse teach through ASI:One. Learner state lives in SpacetimeDB, where Bayesian Knowledge Tracing estimates mastery, SM-2 schedules reviews, and a bandit picks lesson formats.',
+    result: 'Won 3rd place in the Fetch.ai track at MHacks 2026. Cut tap-to-response latency from ~22s to ~9s by folding the Tutor and Curriculum agents into the orchestrator.',
+    highlights: [
+      'Designed the SpacetimeDB schema: 20 tables and 33 reducers covering courses, concept graphs, mastery, live games and arcade runs',
+      'Live multiplayer games flip questions in sync via scheduled reducers; correct answers sit in a private table and scoring is server-side',
+      'Tracked down agents writing to different SpacetimeDB accounts, which showed "zero entries" despite successful writes',
+      'Untangled duplicated frontends and merge conflicts with interactive rebase so Vercel could deploy reliably',
+    ],
+    github: 'https://github.com/ArushNo1/sprout',
+    website: 'https://sproutlearn.tech',
+    image: '/SproutLearn.png',
+    featured: true,
+    event: 'MHacks 2026',
+  },
   {
     id: 'regimon',
     name: 'RegiMon',
@@ -64,8 +87,8 @@ export const projects: Project[] = [
     github: 'https://github.com/ArushNo1/nexus',
     website: 'https://nexus.cognicade.org',
     image: '/Nexus-UI.png',
-    imageFit: 'contain',
-    featured: true,
+    //imageFit: 'contain',
+    featured: false,
     event: 'HackFax x PatriotHacks 2026',
   },
   {
@@ -127,7 +150,7 @@ export const projects: Project[] = [
     github: 'https://github.com/CognicadeStudios/EcoSpark',
     website: 'https://cognicadestudios.github.io/EcoSparkGame/',
     image: '/ecospark.png',
-    imageFit: 'contain',
+    imagePosition: 'center',
     featured: true,
     event: 'Congressional App Challenge 2024',
   },
@@ -137,6 +160,7 @@ export const projects: Project[] = [
     tags: ['Unity', 'Networking', 'C#'],
     description: 'Have a snowball fight with a friend over the internet! Created for a one weekend game jam, but still a blast to play.',
     github: 'https://github.com/2900xt/WinterWarzone',
+    award: "1st Place",
     website: null,
     image: '/WinterWarzone.webp',
     featured: false,
@@ -168,7 +192,7 @@ export const projects: Project[] = [
     website: null,
     image: '/Falcon9.png',
     featured: false,
-    archive: true,
+    archive: false,
     event: null,
   },
   {
@@ -179,9 +203,34 @@ export const projects: Project[] = [
     github: 'https://github.com/ArushNo1/cp-templates',
     website: null,
     image: '/Templates.png',
+    imagePosition: 'left',
     featured: false,
     archive: true,
     event: null,
+  },
+  {
+    id: 'hivemind',
+    name: 'HiveMind',
+    tags: ['Rust', 'Python'],
+    description: 'An open marketplace where AI agents discover each other by capability and self-assemble into teams. A coordinator breaks any goal into specialist roles, recruits agents to fill them, and streams the collaboration live.',
+    tagline: 'A marketplace where AI agents find each other by capability and self-assemble into a team for any goal.',
+    award: '1st Place',
+    problem: 'Every AI agent is a walled garden. They reinvent the same capabilities in isolation, and when they need another service they pretend to be a human, scraping pages and filling out forms.',
+    approach: 'A single Rust service (Axum, Tokio) holds the agent registry and routes messages. A coordinator decomposes a goal into needed capabilities, searches the marketplace, recruits agents, and assembles their answers. Gemini 2.5 Flash reasons in each browser-native agent\'s persona, and everything streams live over SSE.',
+    result: 'Won 1st place at IndyHAX 2026. Anyone can spawn a working agent from the browser in seconds, and the whole product ships as one container.',
+    highlights: [
+      'Gemini 2.5 Flash burned 476 of 500 output tokens on thinking and returned empty replies; thinkingBudget: 0 for structured calls fixed it',
+      'Capability de-duplication and skip-already-hired logic stop the coordinator double-booking one agent for near-synonym needs',
+      'SSE feed with history replay keeps every new browser tab instantly in sync',
+      'Marketplace-aware mock fallback keeps the demo alive with no API key',
+    ],
+    github: 'https://github.com/PranavDivichenchu/indyHacks',
+    website: null,
+    image: "/Hivemind.png",
+    imagePosition: 'left',
+    featured: false,
+    archive: true,
+    event: 'IndyHAX 2026',
   },
   {
     id: 'strategic-tictactoe',
@@ -191,6 +240,7 @@ export const projects: Project[] = [
     github: 'https://github.com/ArushNo1/ITCS/tree/main/Strategic%20Tic%20Tac%20Toe',
     website: null,
     image: '/StrategicTicTacToe.png',
+    imagePosition: 'bottom',
     featured: false,
     archive: true,
     event: null,
@@ -203,6 +253,7 @@ export const projects: Project[] = [
     github: 'https://github.com/ArushNo1/ITCS/tree/main/WinterWonderLand',
     website: null,
     image: '/WinterScene.png',
+    imagePosition: 'top',
     featured: false,
     archive: true,
     event: null,
@@ -215,6 +266,7 @@ export const projects: Project[] = [
     github: 'https://github.com/ArushNo1/PortfolioWebsite',
     website: 'https://arushbodla.org',
     image: '/PortfolioSite.png',
+    imagePosition: 'left',
     featured: false,
     archive: true,
     event: null,

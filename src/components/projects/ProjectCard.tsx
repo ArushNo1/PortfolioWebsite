@@ -3,32 +3,28 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { hasUrl, type Project } from '@/data/projects'
+import { imagePositionClass } from './imagePosition'
 
 interface ProjectCardProps {
   project: Project
   variant?: 'featured' | 'standard'
 }
 
-interface LinkButtonsProps {
-  project: Project
-  tabIndex?: number
-}
-
 function hasDetails(p: Project): boolean {
   return !!(p.problem || p.approach || p.result || p.highlights?.length)
 }
 
-function LinkButtons({ project, tabIndex }: LinkButtonsProps) {
+function LinkButtons({ project }: { project: Project }) {
   const base =
     'border px-3 py-1.5 text-xs tracking-widest transition-all duration-200'
+  // z-30 keeps these above the details overlay (z-20) so they never move on reveal.
   return (
-    <div className="flex flex-wrap gap-3">
+    <div className="relative z-30 flex flex-wrap gap-3">
       {hasUrl(project.github) && (
         <a
           href={project.github}
           target="_blank"
           rel="noopener noreferrer"
-          tabIndex={tabIndex}
           className={`${base} border-terminal-border-bright text-terminal-green-dim hover:border-terminal-green hover:text-terminal-green`}
         >
           [GITHUB →]
@@ -39,7 +35,6 @@ function LinkButtons({ project, tabIndex }: LinkButtonsProps) {
           href={project.website}
           target="_blank"
           rel="noopener noreferrer"
-          tabIndex={tabIndex}
           className={`${base} border-terminal-amber text-terminal-amber hover:bg-terminal-amber hover:text-terminal-bg`}
         >
           [LIVE →]
@@ -106,7 +101,7 @@ export default function ProjectCard({ project, variant = 'standard' }: ProjectCa
               className={
                 project.imageFit === 'contain'
                   ? 'object-contain p-4'
-                  : 'object-cover object-top'
+                  : `object-cover ${imagePositionClass(project)}`
               }
             />
           </div>
@@ -165,7 +160,7 @@ export default function ProjectCard({ project, variant = 'standard' }: ProjectCa
       {details && (
         <div
           aria-hidden={!open}
-          className={`absolute inset-0 z-20 overflow-y-auto bg-terminal-bg/95 backdrop-blur-sm p-5 md:p-6 flex flex-col gap-5 transition-all duration-200 ${
+          className={`absolute inset-0 z-20 overflow-y-auto bg-terminal-bg/95 backdrop-blur-sm px-5 pt-5 pb-16 md:px-6 md:pt-6 md:pb-16 flex flex-col gap-5 transition-all duration-200 ${
             open
               ? 'opacity-100 translate-y-0 pointer-events-auto'
               : 'opacity-0 translate-y-2 pointer-events-none'
@@ -206,10 +201,6 @@ export default function ProjectCard({ project, variant = 'standard' }: ProjectCa
               ))}
             </ul>
           )}
-
-          <div className="mt-auto">
-            <LinkButtons project={project} tabIndex={open ? 0 : -1} />
-          </div>
         </div>
       )}
     </article>
