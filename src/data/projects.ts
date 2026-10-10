@@ -152,7 +152,6 @@ export const projects: Project[] = [
     image: '/ecospark.png',
     imagePosition: 'center',
     featured: true,
-    event: 'Congressional App Challenge 2024',
   },
   {
     id: 'winter-warzone',
