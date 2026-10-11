@@ -150,6 +150,7 @@ export const projects: Project[] = [
     github: 'https://github.com/CognicadeStudios/EcoSpark',
     website: 'https://cognicadestudios.github.io/EcoSparkGame/',
     image: '/ecospark.png',
+    event: null,
     imagePosition: 'center',
     featured: true,
   },
