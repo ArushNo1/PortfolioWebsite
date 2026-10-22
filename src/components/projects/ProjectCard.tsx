@@ -137,9 +137,6 @@ export default function ProjectCard({ project, variant = 'standard' }: ProjectCa
           <p className="text-terminal-bright text-base text-pretty">
             {project.tagline ?? project.description}
           </p>
-          {project.result && (
-            <p className="text-terminal-green-muted text-sm leading-[1.7]"># {project.result}</p>
-          )}
           <div className="mt-auto pt-2">{links}</div>
         </div>
       ) : (
@@ -166,45 +163,48 @@ export default function ProjectCard({ project, variant = 'standard' }: ProjectCa
       {details && (
         <div
           aria-hidden={!open}
-          className={`absolute inset-0 z-20 overflow-y-auto bg-terminal-bg/95 backdrop-blur-sm px-5 pt-5 pb-16 md:px-6 md:pt-6 md:pb-16 flex flex-col gap-5 transition-all duration-200 ${
+          className={`absolute inset-0 z-20 bg-terminal-bg/95 backdrop-blur-sm px-5 pt-5 pb-14 md:px-6 md:pt-6 flex flex-col transition-all duration-200 ${
             open
               ? 'opacity-100 translate-y-0 pointer-events-auto'
               : 'opacity-0 translate-y-2 pointer-events-none'
           } ${revealed}`}
         >
-          <div className="flex items-center justify-between gap-4 text-sm">
-            <span className="text-terminal-green">{`$ man ${project.id}`}</span>
-            <button
-              type="button"
-              onClick={() => setOpen(false)}
-              tabIndex={open ? 0 : -1}
-              className="text-terminal-green-dim hover:text-terminal-amber transition-colors duration-200"
-            >
-              [close ×]
-            </button>
-          </div>
-
-          {(project.problem || project.approach || project.result) && (
-            <div className={`grid gap-4 ${featured ? 'md:grid-cols-3' : ''}`}>
-              {project.problem && <DetailSection label="problem" text={project.problem} />}
-              {project.approach && <DetailSection label="approach" text={project.approach} />}
-              {project.result && <DetailSection label="result" text={project.result} />}
+          {/* Covers the whole card; text that would reach the links (bottom pb-14) is clipped */}
+          <div className="min-h-0 flex-1 overflow-hidden flex flex-col gap-5">
+            <div className="flex items-center justify-between gap-4 text-sm">
+              <span className="text-terminal-green">{`$ man ${project.id}`}</span>
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                tabIndex={open ? 0 : -1}
+                className="text-terminal-green-dim hover:text-terminal-amber transition-colors duration-200"
+              >
+                [close ×]
+              </button>
             </div>
-          )}
 
-          {project.highlights && project.highlights.length > 0 && (
-            <ul className={`grid gap-x-6 gap-y-2 ${featured ? 'md:grid-cols-2' : ''}`}>
-              {project.highlights.map((h) => (
-                <li
-                  key={h}
-                  className="flex gap-2 text-terminal-green-dim text-sm leading-relaxed"
-                >
-                  <span className="text-terminal-green shrink-0">{'>'}</span>
-                  <span>{h}</span>
-                </li>
-              ))}
-            </ul>
-          )}
+            {(project.problem || project.approach || project.result) && (
+              <div className={`grid gap-4 ${featured ? 'md:grid-cols-3' : ''}`}>
+                {project.problem && <DetailSection label="problem" text={project.problem} />}
+                {project.approach && <DetailSection label="approach" text={project.approach} />}
+                {project.result && <DetailSection label="result" text={project.result} />}
+              </div>
+            )}
+
+            {project.highlights && project.highlights.length > 0 && (
+              <ul className={`grid gap-x-6 gap-y-2 ${featured ? 'md:grid-cols-2' : ''}`}>
+                {project.highlights.map((h) => (
+                  <li
+                    key={h}
+                    className="flex gap-2 text-terminal-green-dim text-sm leading-relaxed"
+                  >
+                    <span className="text-terminal-green shrink-0">{'>'}</span>
+                    <span>{h}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
       )}
     </article>

@@ -19,6 +19,14 @@ body {
   color: #dcebd8;
   font-family: var(--font-plex-mono);
   cursor: crosshair;
+  /* main stretches so the terminal bar never sits mid-screen on short pages */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
 }
 
 a,

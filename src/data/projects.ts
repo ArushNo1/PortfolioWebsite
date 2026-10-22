@@ -85,7 +85,7 @@ export const projects: Project[] = [
       'Next.js, Supabase, Remotion and LangGraph joined through designed APIs',
     ],
     github: 'https://github.com/ArushNo1/nexus',
-    website: 'https://nexus.cognicade.org',
+    website: null,
     image: '/Nexus-UI.png',
     //imageFit: 'contain',
     featured: false,
