@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Navbar from '@/components/nav/Navbar'
-import Footer from '@/components/ui/Footer'
+import TerminalDrawer from '@/components/challenges/TerminalDrawer'
 import ChallengeGate from '@/components/challenges/ChallengeGate'
 import TerminalBox from '@/components/ui/TerminalBox'
 import { TIER3_KEY } from '@/data/challenges'
@@ -61,7 +61,7 @@ unsupervised access to Arush Bodla's brain.
           </section>
         )}
       </main>
-      <Footer />
+      <TerminalDrawer />
     </>
   )
 }

@@ -1,5 +1,5 @@
 import Navbar from '@/components/nav/Navbar'
-import Footer from '@/components/ui/Footer'
+import TerminalDrawer from '@/components/challenges/TerminalDrawer'
 import ProjectCard from '@/components/projects/ProjectCard'
 import ProjectArchive from '@/components/projects/ProjectArchive'
 import type { Metadata } from 'next'
@@ -14,43 +14,49 @@ const featured = projects.filter((p) => p.featured)
 const standard = projects.filter((p) => !p.featured && !p.archive)
 const archive = projects.filter((p) => p.archive)
 
+function Ls({ dir }: { dir: string }) {
+  return (
+    <p className="text-base mb-5">
+      <span className="text-terminal-green">$</span> ls {dir}/
+    </p>
+  )
+}
+
 export default function ProjectsPage() {
   return (
     <>
       <Navbar />
-      <main className="px-6 md:px-12 py-16">
-        <div className="max-w-6xl mx-auto space-y-12">
-          <section>
-            <div className="text-terminal-green text-xs tracking-widest mb-8">
-              {'// INCIDENT_LOG — CONFIRMED_OPERATIONS'}
-            </div>
-            <div className="grid gap-4">
-              {featured.map((p) => (
-                <ProjectCard key={p.id} project={p} variant="featured" />
-              ))}
-            </div>
-          </section>
+      <main className="mx-auto w-full max-w-6xl px-6 md:px-12 pt-14 md:pt-20 pb-12 flex flex-col gap-14 md:gap-20">
+        <header>
+          <h1 className="text-terminal-green text-3xl md:text-4xl leading-none font-bold">
+            PROJECTS
+          </h1>
+        </header>
 
-          <section>
-            <div className="text-terminal-green text-xs tracking-widest mb-8">
-              {'// SIDE_OPERATIONS'}
-            </div>
-            <div className="grid md:grid-cols-2 gap-4">
-              {standard.map((p) => (
-                <ProjectCard key={p.id} project={p} />
-              ))}
-            </div>
-          </section>
+        <section>
+          <Ls dir="featured" />
+          <div className="grid gap-6">
+            {featured.map((p) => (
+              <ProjectCard key={p.id} project={p} variant="featured" />
+            ))}
+          </div>
+        </section>
 
-          <section>
-            <div className="text-terminal-green text-xs tracking-widest mb-8">
-              {'// ARCHIVE'}
-            </div>
-            <ProjectArchive projects={archive} />
-          </section>
-        </div>
+        <section>
+          <Ls dir="more" />
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {standard.map((p) => (
+              <ProjectCard key={p.id} project={p} />
+            ))}
+          </div>
+        </section>
+
+        <section>
+          <Ls dir="archive" />
+          <ProjectArchive projects={archive} />
+        </section>
       </main>
-      <Footer />
+      <TerminalDrawer />
     </>
   )
 }

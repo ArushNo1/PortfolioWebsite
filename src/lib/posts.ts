@@ -10,6 +10,19 @@ export interface PostMeta {
   date: string
   description: string
   published: boolean
+  tags: string[]      // first tag is the category used by the /lab filter, e.g. ['writeup', 'pwn']
+}
+
+function toMeta(slug: string, data: Record<string, unknown>): PostMeta {
+  return {
+    slug,
+    title: typeof data.title === 'string' ? data.title : 'Untitled',
+    // YAML parses unquoted dates into Date objects
+    date: data.date instanceof Date ? data.date.toISOString().slice(0, 10) : typeof data.date === 'string' ? data.date : '',
+    description: typeof data.description === 'string' ? data.description : '',
+    published: data.published === true,
+    tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
+  }
 }
 
 export function getAllPosts(): PostMeta[] {
@@ -21,14 +34,7 @@ export function getAllPosts(): PostMeta[] {
     .map((filename) => {
       const slug = filename.replace('.mdx', '')
       const raw = fs.readFileSync(path.join(postsDir, filename), 'utf8')
-      const { data } = matter(raw)
-      return {
-        slug,
-        title: data.title ?? 'Untitled',
-        date: data.date ?? '',
-        description: data.description ?? '',
-        published: data.published ?? false,
-      }
+      return toMeta(slug, matter(raw).data)
     })
     .filter((p) => p.published)
     .sort((a, b) => (a.date < b.date ? 1 : -1))
@@ -40,4 +46,12 @@ export function getPostContent(slug: string): string {
   const raw = fs.readFileSync(filePath, 'utf8')
   const { content } = matter(raw)
   return content
+}
+
+// Meta and raw markdown for one post, published or not (direct links to drafts still work).
+export function getPost(slug: string): { meta: PostMeta; content: string } | null {
+  const filePath = path.join(postsDir, `${slug}.mdx`)
+  if (!fs.existsSync(filePath)) return null
+  const { data, content } = matter(fs.readFileSync(filePath, 'utf8'))
+  return { meta: toMeta(slug, data), content }
 }

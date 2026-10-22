@@ -5,99 +5,106 @@ interface HeroProps {
   id?: string
 }
 
-const credentials: Array<[string, string]> = [
-  ['MANTECH', 'Digital Forensics Intern, Summer 2026'],
-  ['CYBERPATRIOT', '13th of 4,787 teams nationally'],
-  ['COMPTIA', 'Security+'],
-  ['ACL-IT', 'Co-Founder & Tournament Director'],
+const credentials: Array<{ label: string; value: string; sub?: string }> = [
+  { label: 'now', value: 'Digital forensics intern, ManTech', sub: 'summer 2026' },
+  { label: 'cyberpatriot', value: '13th of 4,787 teams', sub: 'nationals' },
+  { label: 'comptia', value: 'Security+' },
+  { label: 'acl-it', value: 'Co-founder, tournament director' },
 ]
+
+const btn = 'border px-4 py-2 text-sm tracking-[.04em] transition-colors duration-200'
 
 export default function Hero({ id }: HeroProps) {
   return (
-    <section id={id} className="px-6 md:px-12 py-20 md:py-28">
-      <div>
-        <div
-          className="hero-typewriter overflow-hidden whitespace-nowrap text-terminal-green-muted text-xs tracking-widest mb-6"
-          style={{ animation: 'typewriter 1.2s steps(24, end) forwards', width: 0 }}
-        >
-          {'> IDENTIFYING SUBJECT...'}
-        </div>
+    <section id={id} className="border-b border-terminal-border">
+      <div className="mx-auto w-full max-w-6xl px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20 flex flex-col-reverse gap-10 md:grid md:grid-cols-[1fr_200px] md:gap-20 md:items-center">
+        <div>
+          <div
+            className="hero-typewriter overflow-hidden whitespace-nowrap text-terminal-green-dim text-sm mb-4"
+            style={{ animation: 'typewriter 0.6s steps(8, end) forwards', width: 0 }}
+          >
+            {'> whoami'}
+          </div>
 
-        <div
-          className="fade-up flex flex-col-reverse gap-10 md:flex-row md:items-center md:gap-20"
-          style={{ animationDelay: '1.2s', opacity: 0 }}
-        >
-          <div className="max-w-3xl">
-            <div className="text-terminal-green-muted text-xs tracking-widest mb-4">
-              {'// SUBJECT IDENTIFIED'}
-            </div>
-
-            <h1 className="text-5xl md:text-7xl text-terminal-green font-bold tracking-tight">
+          <div className="fade-up" style={{ animationDelay: '0.6s', opacity: 0 }}>
+            <h1 className="text-4xl md:text-6xl leading-none text-terminal-green font-bold tracking-[-.02em]">
               ARUSH BODLA
             </h1>
 
             <div className="text-terminal-green-muted my-6 overflow-hidden whitespace-nowrap">
-              ─────────────────────────────────────────────
+              ────────────────────────────────────────────────────────
             </div>
 
-            <div className="space-y-1 mb-6 text-sm">
-              <p className="text-terminal-green-muted text-xs">
-                {'> ERR: I ran out of Claude tokens generating some tagline.'}
-              </p>
-              <p className="text-terminal-amber">
-                {'> I build security tools, play CTFs, and win the occasional hackathon.'}
-              </p>
-            </div>
+            <p className="text-terminal-green-dim text-sm">
+              {'> ERR: I ran out of Claude tokens generating some tagline.'}
+            </p>
+            <p className="text-terminal-bright text-lg md:text-xl leading-snug mt-2">
+              I build security tools, play CTFs, and win the occasional hackathon.
+            </p>
+            <p className="text-[15px] leading-relaxed max-w-[640px] mt-5 text-pretty">
+              I&apos;m a CS freshman at Maryland, in ACES. Linux subteam for UMD CCDC. I&apos;m aiming for
+              AppSec or CNO, but still exploring ways to combine Cyber and CS. 
+              <br /><br />
+              Outside of coding, you can catch me playing geometry dash, watching kurzgesagt, or scrolling Wikipedia.
+            </p>
 
-            <div className="flex flex-wrap gap-2 mb-10">
-              {credentials.map(([title, event]) => (
-                <span
-                  key={title}
-                  className="border border-terminal-border bg-terminal-surface px-2.5 py-1 text-xs tracking-wide"
-                >
-                  <span className="text-terminal-amber">{title}</span>
-                  <span className="text-terminal-green-muted"> · {event}</span>
-                </span>
-              ))}
-            </div>
-
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-3.5 mt-8">
               <Link
                 href="/projects"
-                className="border border-terminal-green text-terminal-green text-xs tracking-widest px-4 py-2 hover:bg-terminal-green hover:text-terminal-bg transition-colors"
+                className={`${btn} border-terminal-green text-terminal-green hover:bg-terminal-green hover:text-terminal-bg`}
               >
-                [VIEW INCIDENTS →]
+                [PROJECTS →]
               </Link>
+              <a
+                href="/Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${btn} border-terminal-amber text-terminal-amber hover:bg-terminal-amber hover:text-terminal-bg`}
+              >
+                [RESUME.PDF]
+              </a>
               <Link
                 href="/contact"
-                className="border border-terminal-green-muted text-terminal-green-muted text-xs tracking-widest px-4 py-2 hover:bg-terminal-green-muted hover:text-terminal-bg transition-colors"
+                className={`${btn} border-terminal-border-bright text-terminal-white hover:border-terminal-green hover:text-terminal-green`}
               >
-                [CONTACT]
+                [EMAIL]
               </Link>
-            </div>
-          </div>
-
-          {/* Subject photo: green-tinted + scanlined until hovered */}
-          <div className="group w-40 md:w-56 shrink-0">
-            <div className="relative aspect-square overflow-hidden border border-terminal-border-bright bg-terminal-bg">
-              <Image
-                src="/SuitPic.png"
-                alt="Arush Bodla"
-                fill
-                priority
-                sizes="(min-width: 768px) 224px, 160px"
-                className="object-cover grayscale contrast-125 brightness-75 transition-all duration-500 group-hover:grayscale-0 group-hover:brightness-100 group-hover:contrast-100"
-              />
-              <div className="absolute inset-0 bg-terminal-green mix-blend-multiply opacity-50 transition-opacity duration-500 group-hover:opacity-0" />
-              <div className="pointer-events-none absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent_0,transparent_2px,rgba(0,0,0,0.35)_2px,rgba(0,0,0,0.35)_3px)]" />
-            </div>
-            <div className="mt-2 flex justify-between text-terminal-green-muted text-[10px] tracking-widest">
-              <span>SUBJECT: AB</span>
-              <span>ID: CONFIRMED</span>
             </div>
           </div>
         </div>
+
+        {/* Photo: green-tinted + scanlined until hovered */}
+        <div className="group w-40 md:w-auto">
+          <div className="relative aspect-square overflow-hidden border border-terminal-border-bright bg-terminal-bg">
+            <Image
+              src="/SuitPic.png"
+              alt="Arush Bodla"
+              fill
+              priority
+              sizes="(min-width: 768px) 200px, 160px"
+              className="object-cover grayscale contrast-125 brightness-75 transition-all duration-500 group-hover:grayscale-0 group-hover:brightness-100 group-hover:contrast-100"
+            />
+            <div className="absolute inset-0 bg-terminal-green mix-blend-multiply opacity-50 transition-opacity duration-500 group-hover:opacity-0" />
+            <div className="pointer-events-none absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent_0,transparent_2px,rgba(0,0,0,0.35)_2px,rgba(0,0,0,0.35)_3px)]" />
+          </div>
+          <p className="mt-2 text-terminal-green-muted text-xs">hover for color</p>
+        </div>
       </div>
+
+      <dl className="mx-auto w-full max-w-6xl px-6 md:px-12 pb-14 md:pb-20 grid grid-cols-2 md:grid-cols-4">
+        {credentials.map(({ label, value, sub }, i) => (
+          <div
+            key={label}
+            className={`border-t border-terminal-border pt-4 pb-5 pr-6 ${
+              i % 2 === 1 ? 'border-l pl-6' : ''
+            } ${i > 0 ? 'md:border-l md:pl-6' : ''}`}
+          >
+            <dt className="text-terminal-amber text-xs mb-1">{label}</dt>
+            <dd className="text-sm leading-snug">{value}</dd>
+            {sub && <dd className="text-terminal-green-dim text-xs">{sub}</dd>}
+          </div>
+        ))}
+      </dl>
     </section>
   )
 }

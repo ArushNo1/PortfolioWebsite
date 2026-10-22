@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import TerminalBox from '@/components/ui/TerminalBox'
 import type { PostMeta } from '@/lib/posts'
 
 interface PostListProps {
@@ -8,44 +7,32 @@ interface PostListProps {
 
 export default function PostList({ posts }: PostListProps) {
   if (posts.length === 0) {
-    return (
-      <div className="text-terminal-green-muted text-xs">
-        {'// No posts published yet.'}
-      </div>
-    )
+    return <p className="text-terminal-green-muted"># no posts here yet</p>
   }
 
   return (
-    <div className="flex flex-col gap-6">
-      {posts.map((post, i) => (
-        <TerminalBox
-          key={post.slug}
-          label={`// POST_${String(i + 1).padStart(3, '0')} — ${post.date}`}
-        >
-          <div className="space-y-2">
-            <div className="flex gap-4">
-              <span className="text-terminal-green-muted text-xs w-28 shrink-0 tracking-widest">
-                TITLE
+    <ul>
+      {posts.map((post) => (
+        <li key={post.slug} className="border-t border-terminal-border">
+          <Link
+            href={`/lab/${post.slug}`}
+            className="group grid gap-x-6 gap-y-1 md:grid-cols-[120px_1fr_180px] md:items-baseline py-5"
+          >
+            <span className="text-terminal-green-dim text-sm">{post.date}</span>
+            <span>
+              <span className="block text-terminal-amber text-base font-semibold mb-1 group-hover:underline underline-offset-4">
+                {post.title}
               </span>
-              <span className="text-terminal-white text-sm">{post.title}</span>
-            </div>
-            <div className="flex gap-4">
-              <span className="text-terminal-green-muted text-xs w-28 shrink-0 tracking-widest">
-                DESCRIPTION
-              </span>
-              <span className="text-terminal-white text-sm">{post.description}</span>
-            </div>
-          </div>
-          <div className="mt-4">
-            <Link
-              href={`/lab/${post.slug}`}
-              className="text-terminal-amber text-xs tracking-widest hover:underline"
-            >
-              [READ →]
-            </Link>
-          </div>
-        </TerminalBox>
+              {post.description && (
+                <span className="block text-[15px] max-w-[640px]">{post.description}</span>
+              )}
+            </span>
+            <span className="text-terminal-green-dim text-[13px] md:text-right">
+              {post.tags.join(' · ')}
+            </span>
+          </Link>
+        </li>
       ))}
-    </div>
+    </ul>
   )
 }

@@ -1,5 +1,5 @@
 import Navbar from '@/components/nav/Navbar'
-import Footer from '@/components/ui/Footer'
+import TerminalDrawer from '@/components/challenges/TerminalDrawer'
 import type { Metadata } from 'next'
 import Contact from '@/components/contact/Contact'
 
@@ -15,7 +15,7 @@ export default function ContactPage() {
       <main>
         <Contact />
       </main>
-      <Footer />
+      <TerminalDrawer />
     </>
   )
 }

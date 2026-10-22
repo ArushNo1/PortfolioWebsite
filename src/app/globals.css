@@ -13,10 +13,11 @@ html {
   background: transparent;
 }
 
+/* Site font. Both are loaded in layout.tsx; swap to var(--font-geist-mono) to go back to Geist Mono. */
 body {
-  background-color: #080c08;
-  color: #c8ffc8;
-  font-family: var(--font-geist-mono);
+  background-color: #0a0f0a;
+  color: #dcebd8;
+  font-family: var(--font-plex-mono);
   cursor: crosshair;
 }
 
@@ -28,8 +29,8 @@ summary,
 }
 
 ::selection {
-  background: #4aff4a;
-  color: #080c08;
+  background: #5cf55c;
+  color: #0a0f0a;
 }
 
 body::before {

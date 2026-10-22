@@ -1,9 +1,8 @@
 import Navbar from '@/components/nav/Navbar'
 import Hero from '@/components/home/Hero'
-import About from '@/components/home/About'
+import GitLog from '@/components/home/GitLog'
 import Skills from '@/components/home/Skills'
-import ChallengeSection from '@/components/home/ChallengeSection'
-import Footer from '@/components/ui/Footer'
+import TerminalDrawer from '@/components/challenges/TerminalDrawer'
 
 export default function Home() {
   return (
@@ -11,11 +10,10 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero id="home" />
-        <About id="about" />
+        <GitLog id="activity" />
         <Skills id="skills" />
-        <ChallengeSection id="challenges" />
       </main>
-      <Footer />
+      <TerminalDrawer />
     </>
   )
 }

@@ -1,57 +1,46 @@
-'use client'
-
-import { useEffect, useState, use } from 'react'
-import { useRouter } from 'next/navigation'
-import Link from 'next/link'
-import dynamic from 'next/dynamic'
-import type { ComponentType } from 'react'
-import Navbar from '@/components/nav/Navbar'
-import Footer from '@/components/ui/Footer'
-import { TIER1_KEY } from '@/data/challenges'
+import { notFound } from 'next/navigation'
+import { getAllPosts, getPost } from '@/lib/posts'
+import PostClient from './PostClient'
 
 interface PageProps {
   params: Promise<{ slug: string }>
 }
 
-export default function LabPostPage({ params }: PageProps) {
-  const { slug } = use(params)
-  const router = useRouter()
-  const [unlocked, setUnlocked] = useState<boolean | null>(null)
-  const [Post, setPost] = useState<ComponentType | null>(null)
+// '## heading' lines outside code fences, with inline markdown stripped
+function getHeadings(markdown: string): string[] {
+  const headings: string[] = []
+  let inFence = false
+  for (const line of markdown.split(/\r?\n/)) {
+    if (line.trimStart().startsWith('```')) inFence = !inFence
+    const m = !inFence && line.match(/^##\s+(.+)/)
+    if (m) headings.push(m[1].replace(/[*_`]|\[([^\]]*)\]\([^)]*\)/g, '$1').trim())
+  }
+  return headings
+}
 
-  useEffect(() => {
-    if (localStorage.getItem(TIER1_KEY) !== 'true') {
-      router.replace('/lab')
-      return
-    }
-    setUnlocked(true)
-  }, [router])
+function readingMinutes(markdown: string): number {
+  return Math.max(1, Math.round(markdown.split(/\s+/).filter(Boolean).length / 200))
+}
 
-  useEffect(() => {
-    if (!unlocked) return
-    const Dyn = dynamic(() => import(`@/content/posts/${slug}.mdx`))
-    setPost(() => Dyn)
-  }, [unlocked, slug])
+export default async function LabPostPage({ params }: PageProps) {
+  const { slug } = await params
+  const post = getPost(slug)
+  if (!post) notFound()
 
-  if (!unlocked) return null
+  // Posts are sorted newest first, so "previous" is the next index
+  const posts = getAllPosts()
+  const i = posts.findIndex((p) => p.slug === slug)
+  const prev = i === -1 ? null : (posts[i + 1] ?? null)
+  const next = i > 0 ? posts[i - 1] : null
 
   return (
-    <>
-      <Navbar />
-      <main className="px-6 md:px-12 py-16">
-        <div className="max-w-3xl mx-auto">
-          <Link
-            href="/lab"
-            className="text-terminal-amber text-xs tracking-widest hover:underline"
-          >
-            [← BACK TO LAB]
-          </Link>
-          <article className="prose prose-terminal max-w-none mt-8">
-            {Post ? <Post /> : <div className="text-terminal-green-muted text-xs">{'// loading...'}</div>}
-          </article>
-        </div>
-      </main>
-      <Footer />
-    </>
+    <PostClient
+      slug={slug}
+      meta={post.meta}
+      headings={getHeadings(post.content)}
+      minutes={readingMinutes(post.content)}
+      prev={prev}
+      next={next}
+    />
   )
 }

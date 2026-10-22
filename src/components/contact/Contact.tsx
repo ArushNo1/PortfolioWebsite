@@ -3,31 +3,23 @@
 import React, { useState } from 'react'
 import { socialLinks } from '@/data/socials'
 
-// Email displayed as hex bytes with a [decode] button.
-// On click: convert hex to ASCII string, replace display with mailto link.
-const EMAIL_HEX = '61 62 6f 64 6c 61 40 75 6d 64 2e 65 64 75'
+const EMAIL = 'abodla@umd.edu'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 const OPEN_TO = ['internships', 'security research', 'startups', 'project ideas']
 
-function decodeHex(hex: string): string {
-  try {
-    return hex
-      .trim()
-      .split(/\s+/)
-      .map((h) => String.fromCharCode(parseInt(h, 16)))
-      .join('')
-  } catch {
-    return ''
-  }
-}
+// 'https://www.github.com/ArushNo1' -> 'github.com/ArushNo1'
+const displayUrl = (href: string) => href.replace(/^https?:\/\/(www\.)?/, '')
+
+const inputClass =
+  'bg-transparent border border-terminal-border focus:border-terminal-green outline-none font-mono text-sm p-2.5 w-full text-terminal-bright placeholder:text-terminal-green-muted'
+const labelClass = 'block mb-2 text-terminal-green-dim text-sm'
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '', company: '' })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error' | 'limited'>('idle')
   const [errors, setErrors] = useState<{ email?: string; message?: string }>({})
-  const [decoded, setDecoded] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -70,71 +62,58 @@ export default function Contact() {
     }
   }
 
-  const decodedEmail = decoded ? decodeHex(EMAIL_HEX) : ''
-
   return (
-    <section className="relative overflow-hidden px-6 md:px-12 py-16" id="contact">
-      <div className="max-w-2xl mx-auto">
-        <div className="text-terminal-green text-xs tracking-widest mb-8">
-          {'// ESTABLISH_CONTACT'}
-        </div>
+    <section className="relative overflow-hidden mx-auto w-full max-w-6xl px-6 md:px-12 pt-14 md:pt-20 pb-12" id="contact">
+      <div className="max-w-3xl">
+        <h1 className="text-terminal-green text-3xl md:text-4xl leading-none font-bold mb-3">
+          CONTACT
+        </h1>
+        <p className="text-base max-w-[640px] mb-10">
+          Email is the fastest way to reach me. I&apos;m open to{' '}
+          {OPEN_TO.slice(0, -1).join(', ')}, and {OPEN_TO[OPEN_TO.length - 1]}, and I usually
+          reply within a couple of days.
+        </p>
 
-        <div className="mb-8">
-          <p className="text-terminal-white text-sm leading-relaxed mb-3">
-            I&apos;m open to {OPEN_TO.slice(0, -1).join(', ')}, and {OPEN_TO[OPEN_TO.length - 1]}.
-            If something here caught your eye, say hi. I usually reply within a couple of days.
-          </p>
-          <div className="flex flex-wrap gap-x-5 gap-y-2">
-            {socialLinks.map(({ href, label }) => (
+        <a
+          href={`mailto:${EMAIL}`}
+          className="block text-terminal-amber text-xl md:text-2xl font-semibold mb-10 break-all hover:underline underline-offset-8"
+        >
+          {EMAIL}
+        </a>
+
+        <div className="text-[15px] leading-[2.2] border-t border-terminal-border pt-3 mb-16">
+          {socialLinks.map(({ href, label }) => (
+            <p key={label} className="grid grid-cols-[110px_1fr] md:grid-cols-[160px_1fr]">
+              <span className="text-terminal-green-dim">{label}</span>
               <a
-                key={label}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-terminal-green-dim text-xs tracking-widest hover:text-terminal-green transition-colors"
+                className="text-terminal-green hover:underline truncate"
               >
-                {`[${label.toUpperCase()} →]`}
+                {displayUrl(href)} →
               </a>
-            ))}
+            </p>
+          ))}
+          <p className="grid grid-cols-[110px_1fr] md:grid-cols-[160px_1fr]">
+            <span className="text-terminal-green-dim">resume</span>
             <a
               href="/Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-terminal-amber text-xs tracking-widest hover:underline"
+              className="text-terminal-green hover:underline"
             >
-              [RESUME.PDF →]
+              resume.pdf →
             </a>
-          </div>
+          </p>
         </div>
 
-        <div className="border border-terminal-border bg-terminal-surface p-5 mb-8">
-          <div className="text-terminal-green-muted text-xs tracking-widest mb-2">
-            {'// DIRECT_CHANNEL'}
-          </div>
-          {!decoded ? (
-            <div className="flex flex-wrap items-center gap-3">
-              <pre className="text-terminal-white text-sm break-all whitespace-pre-wrap">
-                {EMAIL_HEX}
-              </pre>
-              <button
-                type="button"
-                onClick={() => setDecoded(true)}
-                className="border border-terminal-green text-terminal-green text-xs tracking-widest px-3 py-1 hover:bg-terminal-green hover:text-terminal-bg transition-colors"
-              >
-                [decode]
-              </button>
-            </div>
-          ) : (
-            <a
-              href={`mailto:${decodedEmail}`}
-              className="text-terminal-amber text-sm hover:underline break-all"
-            >
-              {decodedEmail || '// decode failed'}
-            </a>
-          )}
-        </div>
+        <p className="text-base mb-5">
+          <span className="text-terminal-green">$</span> ./send-message{' '}
+          <span className="text-terminal-green-muted"># or leave one here</span>
+        </p>
 
-        <form onSubmit={handleSubmit} noValidate className="space-y-5">
+        <form onSubmit={handleSubmit} noValidate className="space-y-5 max-w-2xl">
           {/* Honeypot: hidden from people, filled in by bots */}
           <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
             <label htmlFor="company">Company</label>
@@ -150,11 +129,8 @@ export default function Contact() {
           </div>
 
           <div>
-            <label
-              htmlFor="name"
-              className="block mb-2 text-terminal-green-muted text-xs tracking-widest"
-            >
-              NAME
+            <label htmlFor="name" className={labelClass}>
+              name
             </label>
             <input
               id="name"
@@ -163,16 +139,13 @@ export default function Contact() {
               value={formData.name}
               onChange={handleChange}
               placeholder="enter name"
-              className="bg-transparent border border-terminal-border focus:border-terminal-green outline-none font-mono text-sm p-2 w-full text-terminal-white placeholder:text-terminal-green-muted"
+              className={inputClass}
             />
           </div>
 
           <div>
-            <label
-              htmlFor="email"
-              className="block mb-2 text-terminal-green-muted text-xs tracking-widest"
-            >
-              EMAIL <span className="text-terminal-amber">*</span>
+            <label htmlFor="email" className={labelClass}>
+              email <span className="text-terminal-amber">*</span>
             </label>
             <input
               id="email"
@@ -181,19 +154,16 @@ export default function Contact() {
               value={formData.email}
               onChange={handleChange}
               placeholder="enter email"
-              className="bg-transparent border border-terminal-border focus:border-terminal-green outline-none font-mono text-sm p-2 w-full text-terminal-white placeholder:text-terminal-green-muted"
+              className={inputClass}
             />
             {errors.email && (
-              <p className="text-terminal-red text-xs mt-1">{'// '}{errors.email}</p>
+              <p className="text-terminal-red text-sm mt-1">{'# '}{errors.email}</p>
             )}
           </div>
 
           <div>
-            <label
-              htmlFor="message"
-              className="block mb-2 text-terminal-green-muted text-xs tracking-widest"
-            >
-              MESSAGE <span className="text-terminal-amber">*</span>
+            <label htmlFor="message" className={labelClass}>
+              message <span className="text-terminal-amber">*</span>
             </label>
             <textarea
               id="message"
@@ -202,33 +172,33 @@ export default function Contact() {
               onChange={handleChange}
               rows={6}
               placeholder="enter message"
-              className="bg-transparent border border-terminal-border focus:border-terminal-green outline-none font-mono text-sm p-2 w-full text-terminal-white placeholder:text-terminal-green-muted resize-y"
+              className={`${inputClass} resize-y`}
             />
             {errors.message && (
-              <p className="text-terminal-red text-xs mt-1">{'// '}{errors.message}</p>
+              <p className="text-terminal-red text-sm mt-1">{'# '}{errors.message}</p>
             )}
           </div>
 
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="border border-terminal-amber text-terminal-amber text-xs tracking-widest px-4 py-2 hover:bg-terminal-amber hover:text-terminal-bg transition-colors disabled:opacity-50"
+            className="border border-terminal-amber text-terminal-amber text-sm tracking-[.04em] px-4 py-2 hover:bg-terminal-amber hover:text-terminal-bg transition-colors disabled:opacity-50"
           >
-            [TRANSMIT →]
+            [SEND →]
           </button>
 
           <div role="status" aria-live="polite">
             {status === 'loading' && (
-              <p className="text-terminal-green-dim text-xs">{'// TRANSMITTING...'}</p>
+              <p className="text-terminal-green-dim text-sm">{'# sending...'}</p>
             )}
             {status === 'success' && (
-              <p className="text-terminal-green text-xs">{'// MESSAGE RECEIVED'}</p>
+              <p className="text-terminal-green text-sm">{'# message received'}</p>
             )}
             {status === 'limited' && (
-              <p className="text-terminal-red text-xs">{'// RATE LIMITED — try again later or email directly'}</p>
+              <p className="text-terminal-red text-sm">{'# rate limited, try again later or email directly'}</p>
             )}
             {status === 'error' && (
-              <p className="text-terminal-red text-xs">{'// TRANSMISSION FAILED — try direct email'}</p>
+              <p className="text-terminal-red text-sm">{'# send failed, try email instead'}</p>
             )}
           </div>
         </form>
