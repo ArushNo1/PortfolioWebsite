@@ -13,6 +13,7 @@ const withMDX = createMDX({
 
 const nextConfig: NextConfig = {
   pageExtensions: ['ts', 'tsx', 'mdx'],
+  poweredByHeader: false,
 }
 
 export default withMDX(nextConfig)
