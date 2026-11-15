@@ -6,38 +6,20 @@ interface SkillsProps {
 
 export default function Skills({ id }: SkillsProps) {
   return (
-    <section id={id} className="px-6 md:px-12 py-16">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-terminal-green text-xs tracking-widest mb-8">
-          {'// TACTICS_TECHNIQUES_PROCEDURES'}
-        </div>
-
-        <div className="space-y-8">
-          {skillGroups.map((group) => (
-            <div key={group.label}>
-              <div className="text-terminal-green-muted text-xs tracking-widest mb-3">
-                {group.label}
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-                {group.skills.map(({ name, detail, Icon }) => (
-                  <div
-                    key={name}
-                    className="flex items-center gap-3 px-4 py-3 border border-terminal-border bg-terminal-surface hover:border-terminal-border-bright transition-colors duration-200"
-                  >
-                    <Icon size={18} className="text-terminal-green shrink-0" aria-hidden />
-                    <div className="min-w-0">
-                      <div className="text-terminal-white text-sm">{name}</div>
-                      {detail && (
-                        <div className="text-terminal-green-muted text-xs mt-0.5">{detail}</div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+    <section id={id} className="mx-auto w-full max-w-6xl px-6 md:px-12 py-20">
+      <h2 className="mb-6 text-sm font-semibold uppercase tracking-[.06em] text-terminal-green-dim">Toolkit</h2>
+      <dl className="divide-y divide-terminal-border border-y border-terminal-border">
+        {skillGroups.map((group) => (
+          <div key={group.label} className="grid gap-2 py-4 md:grid-cols-[160px_1fr] md:gap-6">
+            <dt className="font-mono text-xs uppercase tracking-[.06em] text-terminal-green pt-0.5">
+              {group.label.replace(/^\/\/\s*/, '')}
+            </dt>
+            <dd className="text-[15px] leading-relaxed text-terminal-white">
+              {group.skills.map((s) => s.name).join(' · ')}
+            </dd>
+          </div>
+        ))}
+      </dl>
     </section>
   )
 }
