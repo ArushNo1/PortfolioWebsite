@@ -25,7 +25,7 @@ export default function GraveyardPage() {
           <ChallengeGate tier={2} message="TIER 2 CLEARANCE REQUIRED" />
         )}
         {state === 'unlocked' && (
-          <section className="px-6 md:px-12 py-16">
+          <section className="font-mono px-6 md:px-12 py-16">
             <div className="max-w-4xl mx-auto">
               <div className="text-terminal-green text-xs tracking-widest mb-8">
                 {'// INCIDENT_REPORTS — ABANDONED_OPERATIONS'}
@@ -36,8 +36,8 @@ export default function GraveyardPage() {
                     key={p.id}
                     label={`INCIDENT_REPORT_00${i + 1}`}
                   >
-                    <div className='space-y-3 flex flex-row'>
-                      <dl className="space-y-3">
+                    <div className="flex flex-col gap-6 md:flex-row md:items-start">
+                      <dl className="space-y-3 flex-1 min-w-0">
                         <Row k="PROJECT" v={p.name} />
                         <Row k="STATUS" v={p.status} />
                         <Row k="STACK" v={p.stack.join(' · ')} />
@@ -50,6 +50,7 @@ export default function GraveyardPage() {
                         alt={`${p.name} screenshot`}
                         width={300}
                         height={200}
+                        className="w-full md:w-[300px] h-auto rounded border border-terminal-border"
                       />)}
                     </div>
                   </TerminalBox>
