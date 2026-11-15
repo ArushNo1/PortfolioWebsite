@@ -35,6 +35,12 @@ summary,
   cursor: pointer;
 }
 
+:focus-visible {
+  outline: 2px solid #7ee787;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
 ::selection {
   background: #7ee787;
   color: #0e1110;
