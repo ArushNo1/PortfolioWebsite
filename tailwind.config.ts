@@ -9,20 +9,24 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-geist-sans)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-plex-mono)', 'ui-monospace', 'monospace'],
+      },
       colors: {
         terminal: {
-          bg: '#0a0f0a',
-          surface: '#0d140d',
-          border: '#1f3320',
-          'border-dim': '#14221a',
-          'border-bright': '#3d5c3d',
-          green: '#5cf55c',
-          'green-dim': '#9dbf97',
-          'green-muted': '#6f8f6a',
-          amber: '#ffb42e',
+          bg: '#0e1110',
+          surface: '#131716',
+          border: '#222826',
+          'border-dim': '#1a1f1d',
+          'border-bright': '#3a423f',
+          green: '#7ee787',
+          'green-dim': '#a3aba7',
+          'green-muted': '#7d8682',
+          amber: '#e3b341',
           red: '#ff6b5e',
-          white: '#dcebd8',
-          bright: '#f1f8ef',
+          white: '#e6eae7',
+          bright: '#f5f7f6',
         },
       },
       typography: ({ theme }: { theme: (path: string) => string }) => ({

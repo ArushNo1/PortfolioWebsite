@@ -23,7 +23,7 @@ export default function FlagPage() {
           <ChallengeGate tier={3} message="TIER 3 CLEARANCE REQUIRED" />
         )}
         {state === 'unlocked' && (
-          <section className="px-6 md:px-12 py-20">
+          <section className="font-mono px-6 md:px-12 py-20">
             <div className="max-w-3xl mx-auto space-y-10">
               <div className="text-terminal-amber text-3xl md:text-5xl font-bold tracking-tight break-words">
                 FLAG&#123;y0u_actually_did_it&#125;

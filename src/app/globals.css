@@ -15,10 +15,9 @@ html {
 
 /* Site font. Both are loaded in layout.tsx; swap to var(--font-geist-mono) to go back to Geist Mono. */
 body {
-  background-color: #0a0f0a;
-  color: #dcebd8;
-  font-family: var(--font-plex-mono);
-  cursor: crosshair;
+  background-color: #0e1110;
+  color: #e6eae7;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
   /* main stretches so the terminal bar never sits mid-screen on short pages */
   min-height: 100vh;
   display: flex;
@@ -36,24 +35,55 @@ summary,
   cursor: pointer;
 }
 
-::selection {
-  background: #5cf55c;
-  color: #0a0f0a;
+:focus-visible {
+  outline: 2px solid #7ee787;
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
-body::before {
+::selection {
+  background: #7ee787;
+  color: #0e1110;
+}
+
+/* Phosphor mode: only inside the opened terminal drawer. */
+/* Needs a positioned parent (sticky/relative) for the scanline layer. */
+.crt {
+  isolation: isolate;
+  background-color: #0a0f0a;
+  color: #b8f5b0;
+  text-shadow: 0 0 6px rgba(92, 245, 92, 0.35);
+}
+.crt::after {
   content: '';
-  position: fixed;
+  position: absolute;
   inset: 0;
+  pointer-events: none;
+  z-index: 1;
   background: repeating-linear-gradient(
     0deg,
-    transparent,
+    transparent 0,
     transparent 2px,
-    rgba(0, 255, 0, 0.012) 2px,
-    rgba(0, 255, 0, 0.012) 4px
+    rgba(0, 0, 0, 0.28) 2px,
+    rgba(0, 0, 0, 0.28) 3px
   );
+}
+
+/* Project screenshots go phosphor on hover. */
+.phosphor-hover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
   pointer-events: none;
-  z-index: 9999;
+  opacity: 0;
+  transition: opacity 250ms ease;
+  background:
+    repeating-linear-gradient(0deg, transparent 0, transparent 2px, rgba(0, 0, 0, 0.35) 2px, rgba(0, 0, 0, 0.35) 3px),
+    rgba(92, 245, 92, 0.28);
+  mix-blend-mode: multiply;
+}
+@media (hover: hover) {
+  .group:hover .phosphor-hover::after { opacity: 1; }
 }
 
 @keyframes blink {

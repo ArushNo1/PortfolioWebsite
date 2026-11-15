@@ -58,7 +58,7 @@ export default function Navbar() {
           type="button"
           aria-label="Toggle menu"
           aria-expanded={menuOpen}
-          className="md:hidden flex flex-col gap-1 p-2"
+          className="md:hidden -mr-2 flex h-11 w-11 flex-col items-center justify-center gap-1"
           onClick={() => setMenuOpen((o) => !o)}
         >
           <span className="block w-5 h-px bg-terminal-green" />
@@ -68,14 +68,14 @@ export default function Navbar() {
       </div>
 
       {menuOpen && (
-        <div className="md:hidden border-t border-terminal-border flex flex-col px-6 py-4 gap-3">
+        <div className="md:hidden border-t border-terminal-border flex flex-col px-6 py-2">
           {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
               onClick={() => setMenuOpen(false)}
               aria-current={isActive(l.href) ? 'page' : undefined}
-              className={`self-start ${linkClass(l.href)}`}
+              className={`py-3 text-base ${linkClass(l.href)}`}
             >
               {l.label}
             </Link>
@@ -84,7 +84,7 @@ export default function Navbar() {
             href="/Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="self-start text-terminal-amber hover:underline underline-offset-[6px]"
+            className="py-3 text-base text-terminal-amber hover:underline underline-offset-[6px]"
           >
             resume.pdf
           </a>
