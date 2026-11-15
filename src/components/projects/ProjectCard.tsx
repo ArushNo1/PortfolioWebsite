@@ -28,13 +28,6 @@ export default function ProjectCard({ project, variant = 'standard' }: ProjectCa
   const featured = variant === 'featured'
   const details = hasDetails(project)
 
-  // Reveal on hover only for devices that actually hover; touch uses the toggle.
-  const revealed = [
-    '[@media(hover:hover)]:group-hover:opacity-100',
-    '[@media(hover:hover)]:group-hover:translate-y-0',
-    '[@media(hover:hover)]:group-hover:pointer-events-auto',
-  ].join(' ')
-
   const links = (
     // z-30 keeps these above the details overlay (z-20) so they never move on reveal.
     <div className="relative z-30 flex flex-wrap gap-x-5 gap-y-1 text-sm">
@@ -43,7 +36,7 @@ export default function ProjectCard({ project, variant = 'standard' }: ProjectCa
           href={project.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-terminal-green hover:underline"
+          className="text-terminal-green hover:underline underline-offset-4"
         >
           GitHub →
         </a>
@@ -53,7 +46,7 @@ export default function ProjectCard({ project, variant = 'standard' }: ProjectCa
           href={project.website}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-terminal-amber hover:underline"
+          className="text-terminal-white hover:text-terminal-green hover:underline underline-offset-4"
         >
           Live →
         </a>
@@ -63,9 +56,9 @@ export default function ProjectCard({ project, variant = 'standard' }: ProjectCa
           type="button"
           onClick={() => setOpen(true)}
           aria-expanded={open}
-          className="text-terminal-green-dim hover:text-terminal-green transition-colors duration-200"
+          className="text-terminal-green-dim hover:text-terminal-white transition-colors duration-200"
         >
-          Details
+          Details ↓
         </button>
       )}
     </div>
@@ -118,7 +111,7 @@ export default function ProjectCard({ project, variant = 'standard' }: ProjectCa
           <p className="text-terminal-green-dim text-[13px] lowercase">{project.tags.join(' · ')}</p>
           <div>
             <div className="flex flex-wrap items-center gap-3">
-              <h3 className="text-terminal-amber text-xl font-bold">
+              <h3 className="text-terminal-bright text-xl font-semibold tracking-[-.01em]">
                 {project.name}
               </h3>
               {project.award && (
@@ -139,7 +132,7 @@ export default function ProjectCard({ project, variant = 'standard' }: ProjectCa
       ) : (
         <div className="flex flex-col flex-1 gap-1.5 px-[18px] py-4">
           <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
-            <h3 className="text-terminal-amber text-base font-semibold">{project.name}</h3>
+            <h3 className="text-terminal-bright text-base font-semibold">{project.name}</h3>
             {project.award && (
               <span className="text-terminal-bg bg-terminal-amber text-xs font-semibold px-1.5 py-px">
                 ★ {project.award}
@@ -164,7 +157,7 @@ export default function ProjectCard({ project, variant = 'standard' }: ProjectCa
             open
               ? 'opacity-100 translate-y-0 pointer-events-auto'
               : 'opacity-0 translate-y-2 pointer-events-none'
-          } ${revealed}`}
+          }`}
         >
           {/* Covers the whole card; text that would reach the links (bottom pb-14) is clipped */}
           <div className="min-h-0 flex-1 overflow-hidden flex flex-col gap-5">
