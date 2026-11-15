@@ -1,10 +1,8 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import ChallengeGate from '@/components/challenges/ChallengeGate'
+import { useState } from 'react'
 import PostList from '@/components/lab/PostList'
 import PageHeader from '@/components/ui/PageHeader'
-import { TIER1_KEY } from '@/data/challenges'
 import type { PostMeta } from '@/lib/posts'
 
 interface LabClientProps {
@@ -12,16 +10,7 @@ interface LabClientProps {
 }
 
 export default function LabClient({ posts }: LabClientProps) {
-  const [state, setState] = useState<'checking' | 'locked' | 'unlocked'>('checking')
   const [category, setCategory] = useState('all')
-
-  useEffect(() => {
-    setState(localStorage.getItem(TIER1_KEY) === 'true' ? 'unlocked' : 'locked')
-  }, [])
-
-  if (state === 'checking') return null
-  if (state === 'locked')
-    return <ChallengeGate tier={1} message="TIER 1 CLEARANCE REQUIRED" />
 
   // Categories come from each post's first tag
   const categories = Array.from(new Set(posts.map((p) => p.tags[0]).filter(Boolean)))

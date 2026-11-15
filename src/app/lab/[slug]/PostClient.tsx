@@ -1,13 +1,11 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import type { ComponentType } from 'react'
 import Navbar from '@/components/nav/Navbar'
 import TerminalDrawer from '@/components/challenges/TerminalDrawer'
-import { TIER1_KEY } from '@/data/challenges'
 import type { PostMeta } from '@/lib/posts'
 
 interface PostClientProps {
@@ -31,26 +29,13 @@ const prose = [
 ].join(' ')
 
 export default function PostClient({ slug, meta, headings, minutes, prev, next }: PostClientProps) {
-  const router = useRouter()
   const articleRef = useRef<HTMLElement>(null)
-  const [unlocked, setUnlocked] = useState<boolean | null>(null)
   const [Post, setPost] = useState<ComponentType | null>(null)
 
   useEffect(() => {
-    if (localStorage.getItem(TIER1_KEY) !== 'true') {
-      router.replace('/lab')
-      return
-    }
-    setUnlocked(true)
-  }, [router])
-
-  useEffect(() => {
-    if (!unlocked) return
     const Dyn = dynamic(() => import(`@/content/posts/${slug}.mdx`))
     setPost(() => Dyn)
-  }, [unlocked, slug])
-
-  if (!unlocked) return null
+  }, [slug])
 
   const scrollToHeading = (i: number) =>
     articleRef.current?.querySelectorAll('h2')[i]?.scrollIntoView({ behavior: 'smooth' })
