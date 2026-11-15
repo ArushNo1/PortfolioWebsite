@@ -41,8 +41,8 @@ summary,
 }
 
 /* Phosphor mode: only inside the opened terminal drawer. */
+/* Needs a positioned parent (sticky/relative) for the scanline layer. */
 .crt {
-  position: relative;
   isolation: isolate;
   background-color: #0a0f0a;
   color: #b8f5b0;
