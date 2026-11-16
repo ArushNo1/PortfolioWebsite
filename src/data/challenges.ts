@@ -32,7 +32,7 @@ export const TIER2_FLAG = 'dp stands for dynamic programming, of course'
 export const TIER3_FLAG = 'just use ternary search cheese'
 
 // Unlock link labels
-export const TIER1_UNLOCK_LABEL = 'UNLOCK THE LAB →'
+export const TIER1_UNLOCK_LABEL = 'NEXT: puzzle 2. OR READ THE LAB →'
 export const TIER2_UNLOCK_LABEL = 'VIEW THE GRAVEYARD →'
 export const TIER3_UNLOCK_LABEL = 'ACCESS THE FLAG →'
 

@@ -26,6 +26,8 @@ export default async function LabPostPage({ params }: PageProps) {
   const { slug } = await params
   const post = getPost(slug)
   if (!post) notFound()
+  // Drafts stay previewable in `next dev` but 404 on the live site.
+  if (!post.meta.published && process.env.NODE_ENV === 'production') notFound()
 
   // Posts are sorted newest first, so "previous" is the next index
   const posts = getAllPosts()
