@@ -48,6 +48,28 @@ export const projects: Project[] = [
     event: 'MHacks 2026',
   },
   {
+    id: 'saltline',
+    name: 'Saltline',
+    tags: ['Arduino', 'C++', 'Raspberry Pi', 'Python', 'Flask', 'SQLite', 'Supabase', 'Next.js'],
+    description: 'A sub-$40 salinity sensor that slides onto a hand pump or water line, flags seawater creeping into drinking wells, and streams readings to a live dashboard. No test strips or chemicals.',
+    tagline: 'Two screws and a $10 microcontroller that tell you if your well water has turned salty.',
+    problem: 'In coastal Bangladesh and the Mekong Delta, the sea is creeping into drinking wells. A well that\'s fine in January can be too salty by March, and testing means a lab trip or test strips that run out.',
+    approach: 'An Arduino reads two stainless steel screw electrodes as a voltage divider, corrects for temperature with a thermistor, and maps conductivity to sodium in mg/L. A Raspberry Pi relay buffers every reading in a SQLite outbox and forwards it to saltline.surf.',
+    result: 'Calibrated against three salt solutions and detected their concentrations. Readings stream every 2s and appear on the dashboard ~1.4s after reaching the Pi, and keep logging locally with no internet.',
+    highlights: [
+      'Wrote all the Arduino firmware: conductivity, 25 °C temperature correction, status LED and a servo valve that blocks salty water',
+      'Owned the Raspberry Pi: OS, networking, Tailscale SSH, and a Flask/waitress relay under systemd that answers the sensor in ~5 ms',
+      'Offline-first outbox: at-least-once delivery, oldest-first with retries and backoff; a simulated outage drained 20 queued readings in order, none lost',
+      'Got a Wi-Fi-less Arduino online by wiring it to the Pi over one power+data cable and letting the Pi handle networking',
+      'Fixed cross-team format mismatches by writing an API contract and having the relay pass bodies through unchanged',
+    ],
+    github: 'https://github.com/ArushNo1/saltline',
+    website: 'https://saltline.surf',
+    image: '/RegiMon.png', // placeholder until a Saltline photo is added
+    featured: true,
+    event: null,
+  },
+  {
     id: 'regimon',
     name: 'RegiMon',
     tags: ['Rust', 'Tauri', 'Win32', 'Registry'],
