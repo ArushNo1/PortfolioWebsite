@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import ChallengeGate from '@/components/challenges/ChallengeGate'
 import PostList from '@/components/lab/PostList'
+import PageHeader from '@/components/ui/PageHeader'
 import { TIER1_KEY } from '@/data/challenges'
 import type { PostMeta } from '@/lib/posts'
 
@@ -28,15 +29,14 @@ export default function LabClient({ posts }: LabClientProps) {
 
   return (
     <section className="mx-auto w-full max-w-6xl px-6 md:px-12 pt-14 md:pt-20 pb-12">
-      <h1 className="text-terminal-green text-3xl md:text-4xl leading-none font-bold mb-3">
-        LAB
-      </h1>
-      <p className="text-base max-w-[640px] mb-10">
-        Writeups, notes, and whatever I was thinking about at the time.
-      </p>
+      <div className="mb-10">
+        <PageHeader title="Lab" command="cd ~/lab">
+          Writeups, notes, and whatever I was thinking about at the time.
+        </PageHeader>
+      </div>
 
       {categories.length > 0 && (
-        <div className="flex flex-wrap gap-x-5 text-sm mb-2">
+        <div className="flex flex-wrap gap-2 text-sm mb-4">
           {['all', ...categories].map((c) => (
             <button
               key={c}
@@ -44,9 +44,11 @@ export default function LabClient({ posts }: LabClientProps) {
               onClick={() => setCategory(c)}
               aria-pressed={category === c}
               className={
-                category === c
-                  ? 'text-terminal-green underline underline-offset-[6px]'
-                  : 'text-terminal-white hover:text-terminal-green transition-colors duration-200'
+                `rounded-full border px-3 py-1 transition-colors duration-200 ${
+                  category === c
+                    ? 'border-terminal-green text-terminal-green'
+                    : 'border-terminal-border text-terminal-green-dim hover:text-terminal-white hover:border-terminal-border-bright'
+                }`
               }
             >
               {c}

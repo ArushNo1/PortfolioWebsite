@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import { socialLinks } from '@/data/socials'
+import PageHeader, { SectionLabel } from '@/components/ui/PageHeader'
 
 const EMAIL = 'abodla@umd.edu'
 
@@ -13,8 +14,8 @@ const OPEN_TO = ['internships', 'security research', 'startups', 'project ideas'
 const displayUrl = (href: string) => href.replace(/^https?:\/\/(www\.)?/, '')
 
 const inputClass =
-  'bg-transparent border border-terminal-border focus:border-terminal-green outline-none font-mono text-sm p-2.5 w-full text-terminal-bright placeholder:text-terminal-green-muted'
-const labelClass = 'block mb-2 text-terminal-green-dim text-sm'
+  'rounded-md bg-terminal-surface border border-terminal-border focus:border-terminal-green focus:ring-1 focus:ring-terminal-green outline-none text-[15px] px-3 py-2.5 w-full text-terminal-bright placeholder:text-terminal-green-muted transition-colors duration-200'
+const labelClass = 'block mb-2 text-terminal-white text-sm font-medium'
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '', company: '' })
@@ -65,18 +66,15 @@ export default function Contact() {
   return (
     <section className="relative overflow-hidden mx-auto w-full max-w-6xl px-6 md:px-12 pt-14 md:pt-20 pb-12" id="contact">
       <div className="max-w-3xl">
-        <h1 className="text-terminal-green text-3xl md:text-4xl leading-none font-bold mb-3">
-          CONTACT
-        </h1>
-        <p className="text-base max-w-[640px] mb-10">
+        <PageHeader title="Contact" command="./contact">
           Email is the fastest way to reach me. I&apos;m open to{' '}
           {OPEN_TO.slice(0, -1).join(', ')}, and {OPEN_TO[OPEN_TO.length - 1]}, and I usually
           reply within a couple of days.
-        </p>
+        </PageHeader>
 
         <a
           href={`mailto:${EMAIL}`}
-          className="block text-terminal-amber text-xl md:text-2xl font-semibold mb-10 break-all hover:underline underline-offset-8"
+          className="mt-8 mb-10 inline-block text-terminal-green text-xl md:text-2xl font-semibold break-all hover:underline underline-offset-8"
         >
           {EMAIL}
         </a>
@@ -84,34 +82,31 @@ export default function Contact() {
         <div className="text-[15px] leading-[2.2] border-t border-terminal-border pt-3 mb-16">
           {socialLinks.map(({ href, label }) => (
             <p key={label} className="grid grid-cols-[110px_1fr] md:grid-cols-[160px_1fr]">
-              <span className="text-terminal-green-dim">{label}</span>
+              <span className="text-terminal-green-dim capitalize">{label}</span>
               <a
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-terminal-green hover:underline truncate"
+                className="text-terminal-white hover:text-terminal-green transition-colors duration-200 truncate"
               >
                 {displayUrl(href)} →
               </a>
             </p>
           ))}
           <p className="grid grid-cols-[110px_1fr] md:grid-cols-[160px_1fr]">
-            <span className="text-terminal-green-dim">resume</span>
+            <span className="text-terminal-green-dim">Résumé</span>
             <a
               href="/Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-terminal-green hover:underline"
+              className="text-terminal-white hover:text-terminal-green transition-colors duration-200"
             >
-              resume.pdf →
+              Resume.pdf →
             </a>
           </p>
         </div>
 
-        <p className="text-base mb-5">
-          <span className="text-terminal-green">$</span> ./send-message{' '}
-          <span className="text-terminal-green-muted"># or leave one here</span>
-        </p>
+        <SectionLabel>Or leave a message</SectionLabel>
 
         <form onSubmit={handleSubmit} noValidate className="space-y-5 max-w-2xl">
           {/* Honeypot: hidden from people, filled in by bots */}
@@ -130,7 +125,7 @@ export default function Contact() {
 
           <div>
             <label htmlFor="name" className={labelClass}>
-              name
+              Name
             </label>
             <input
               id="name"
@@ -138,14 +133,14 @@ export default function Contact() {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              placeholder="enter name"
+              placeholder="Your name"
               className={inputClass}
             />
           </div>
 
           <div>
             <label htmlFor="email" className={labelClass}>
-              email <span className="text-terminal-amber">*</span>
+              Email <span className="text-terminal-amber">*</span>
             </label>
             <input
               id="email"
@@ -153,17 +148,17 @@ export default function Contact() {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="enter email"
+              placeholder="you@example.com"
               className={inputClass}
             />
             {errors.email && (
-              <p className="text-terminal-red text-sm mt-1">{'# '}{errors.email}</p>
+              <p className="text-terminal-red text-sm mt-1">{errors.email}</p>
             )}
           </div>
 
           <div>
             <label htmlFor="message" className={labelClass}>
-              message <span className="text-terminal-amber">*</span>
+              Message <span className="text-terminal-amber">*</span>
             </label>
             <textarea
               id="message"
@@ -171,34 +166,34 @@ export default function Contact() {
               value={formData.message}
               onChange={handleChange}
               rows={6}
-              placeholder="enter message"
+              placeholder="What are you working on?"
               className={`${inputClass} resize-y`}
             />
             {errors.message && (
-              <p className="text-terminal-red text-sm mt-1">{'# '}{errors.message}</p>
+              <p className="text-terminal-red text-sm mt-1">{errors.message}</p>
             )}
           </div>
 
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="border border-terminal-amber text-terminal-amber text-sm tracking-[.04em] px-4 py-2 hover:bg-terminal-amber hover:text-terminal-bg transition-colors disabled:opacity-50"
+            className="rounded-md bg-terminal-green px-5 py-3 text-[15px] font-medium text-terminal-bg hover:bg-terminal-bright transition-colors duration-200 disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terminal-green"
           >
-            [SEND →]
+            Send message
           </button>
 
           <div role="status" aria-live="polite">
             {status === 'loading' && (
-              <p className="text-terminal-green-dim text-sm">{'# sending...'}</p>
+              <p className="text-terminal-green-dim text-sm">Sending…</p>
             )}
             {status === 'success' && (
-              <p className="text-terminal-green text-sm">{'# message received'}</p>
+              <p className="text-terminal-green text-sm">Message sent. I'll get back to you soon.</p>
             )}
             {status === 'limited' && (
-              <p className="text-terminal-red text-sm">{'# rate limited, try again later or email directly'}</p>
+              <p className="text-terminal-red text-sm">Too many messages. Try again later, or email me directly.</p>
             )}
             {status === 'error' && (
-              <p className="text-terminal-red text-sm">{'# send failed, try email instead'}</p>
+              <p className="text-terminal-red text-sm">Couldn't send that. Email me directly instead.</p>
             )}
           </div>
         </form>
