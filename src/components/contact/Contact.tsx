@@ -187,13 +187,13 @@ export default function Contact() {
               <p className="text-terminal-green-dim text-sm">Sending…</p>
             )}
             {status === 'success' && (
-              <p className="text-terminal-green text-sm">Message sent. I'll get back to you soon.</p>
+              <p className="text-terminal-green text-sm">Message sent. I&apos;ll get back to you soon.</p>
             )}
             {status === 'limited' && (
               <p className="text-terminal-red text-sm">Too many messages. Try again later, or email me directly.</p>
             )}
             {status === 'error' && (
-              <p className="text-terminal-red text-sm">Couldn't send that. Email me directly instead.</p>
+              <p className="text-terminal-red text-sm">Couldn&apos;t send that. Email me directly instead.</p>
             )}
           </div>
         </form>
