@@ -94,7 +94,7 @@ export default function ProjectCard({ project, variant = 'standard' }: ProjectCa
             </span>
           </div>
           <div
-            className={`relative bg-terminal-bg ${
+            className={`phosphor-hover relative bg-terminal-bg ${
               featured ? 'aspect-video md:aspect-auto md:flex-1 md:min-h-[320px]' : 'h-[140px]'
             }`}
           >

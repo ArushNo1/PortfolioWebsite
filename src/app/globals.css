@@ -40,6 +40,46 @@ summary,
   color: #0e1110;
 }
 
+/* Phosphor mode: only inside the opened terminal drawer. */
+.crt {
+  position: relative;
+  isolation: isolate;
+  background-color: #0a0f0a;
+  color: #b8f5b0;
+  text-shadow: 0 0 6px rgba(92, 245, 92, 0.35);
+}
+.crt::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0,
+    transparent 2px,
+    rgba(0, 0, 0, 0.28) 2px,
+    rgba(0, 0, 0, 0.28) 3px
+  );
+}
+
+/* Project screenshots go phosphor on hover. */
+.phosphor-hover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 250ms ease;
+  background:
+    repeating-linear-gradient(0deg, transparent 0, transparent 2px, rgba(0, 0, 0, 0.35) 2px, rgba(0, 0, 0, 0.35) 3px),
+    rgba(92, 245, 92, 0.28);
+  mix-blend-mode: multiply;
+}
+@media (hover: hover) {
+  .group:hover .phosphor-hover::after { opacity: 1; }
+}
+
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50%       { opacity: 0; }

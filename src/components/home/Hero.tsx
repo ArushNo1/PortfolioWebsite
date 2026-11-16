@@ -20,6 +20,13 @@ export default function Hero({ id }: HeroProps) {
     <section id={id} className="mx-auto w-full max-w-6xl px-6 md:px-12">
       <div className="flex flex-col-reverse gap-10 pt-16 pb-12 md:grid md:grid-cols-[1fr_200px] md:items-center md:gap-16 md:pt-24 md:pb-14">
         <div>
+          <div
+            className="hero-typewriter mb-3 overflow-hidden whitespace-nowrap font-mono text-sm text-terminal-green"
+            style={{ animation: 'typewriter 0.6s steps(8, end) forwards', width: 0 }}
+            aria-hidden
+          >
+            {'> whoami'}
+          </div>
           <h1 className="text-5xl md:text-6xl font-bold tracking-[-.03em] leading-[1.05] text-terminal-bright">
             Arush Bodla
           </h1>

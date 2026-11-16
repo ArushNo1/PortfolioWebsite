@@ -114,7 +114,7 @@ export default function TerminalDrawer() {
     <section
       id="challenges"
       // Column-reversed so the bar stays at the bottom and the shell grows upward above it
-      className="sticky bottom-0 z-40 mt-16 flex flex-col-reverse border-t border-terminal-border bg-terminal-surface"
+      className={`sticky bottom-0 z-40 mt-16 flex flex-col-reverse border-t border-terminal-border bg-terminal-surface font-mono ${open ? 'crt' : ''}`}
     >
       <div className={open ? 'border-t border-terminal-border' : ''}>
         <div className="flex items-center gap-6 mx-auto w-full max-w-6xl px-6 md:px-12 py-2 text-[13px]">
