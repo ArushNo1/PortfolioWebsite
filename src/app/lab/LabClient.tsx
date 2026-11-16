@@ -20,7 +20,7 @@ export default function LabClient({ posts }: LabClientProps) {
     <section className="mx-auto w-full max-w-6xl px-6 md:px-12 pt-14 md:pt-20 pb-12">
       <div className="mb-10">
         <PageHeader title="Lab" command="cd ~/lab">
-          Writeups, notes, and whatever I was thinking about at the time.
+          Writeups and notes.
         </PageHeader>
       </div>
 

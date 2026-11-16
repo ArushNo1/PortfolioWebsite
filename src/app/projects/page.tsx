@@ -21,7 +21,7 @@ export default function ProjectsPage() {
       <Navbar />
       <main className="mx-auto w-full max-w-6xl px-6 md:px-12 pt-14 md:pt-20 pb-12 flex flex-col gap-14 md:gap-20">
         <PageHeader title="Projects" command="ls ~/projects">
-          Security tools, hackathon builds, and things I made because I wanted them to exist.
+          Security tools, hackathon builds, and fun things I made.
         </PageHeader>
 
         <section>
