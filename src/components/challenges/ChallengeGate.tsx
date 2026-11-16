@@ -8,7 +8,7 @@ interface ChallengeGateProps {
 export default function ChallengeGate({ tier, message }: ChallengeGateProps) {
   return (
     <div className="min-h-[60vh] flex items-center justify-center px-6">
-      <div className="max-w-xl w-full border border-terminal-border bg-terminal-surface p-8">
+      <div className="crt font-mono max-w-xl w-full rounded-lg border border-terminal-border p-8">
         <div className="text-terminal-red text-sm tracking-widest mb-6">
           {'// ACCESS DENIED — '}{message}
         </div>
@@ -18,7 +18,7 @@ export default function ChallengeGate({ tier, message }: ChallengeGateProps) {
         </p>
         <Link
           href="/#challenges"
-          className="text-terminal-amber text-sm hover:underline"
+          className="relative z-10 text-terminal-amber text-sm hover:underline"
         >
           [← open the terminal]
         </Link>
