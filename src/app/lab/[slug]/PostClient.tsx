@@ -60,7 +60,7 @@ export default function PostClient({ slug, meta, headings, minutes, prev, next }
       <Navbar />
       <main className="mx-auto w-full max-w-6xl px-6 md:px-12 pt-12 md:pt-16 pb-12 grid gap-10 md:grid-cols-[180px_minmax(0,680px)] md:gap-16">
         <aside className="font-mono text-terminal-green-dim text-[13px] leading-[1.9] md:sticky md:top-24 md:self-start">
-          <Link href="/lab" className="text-terminal-green hover:underline">
+          <Link href="/lab" className="text-terminal-green underline underline-offset-4">
             ← Lab
           </Link>
           <p className="mt-7">{meta.date}</p>
