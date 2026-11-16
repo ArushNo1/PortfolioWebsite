@@ -45,7 +45,7 @@ export default function ProjectCard({ project, variant = 'standard' }: ProjectCa
           rel="noopener noreferrer"
           className="text-terminal-green hover:underline"
         >
-          [github →]
+          GitHub →
         </a>
       )}
       {hasUrl(project.website) && (
@@ -55,7 +55,7 @@ export default function ProjectCard({ project, variant = 'standard' }: ProjectCa
           rel="noopener noreferrer"
           className="text-terminal-amber hover:underline"
         >
-          [live →]
+          Live →
         </a>
       )}
       {details && (
@@ -65,7 +65,7 @@ export default function ProjectCard({ project, variant = 'standard' }: ProjectCa
           aria-expanded={open}
           className="text-terminal-green-dim hover:text-terminal-green transition-colors duration-200"
         >
-          [details →]
+          Details
         </button>
       )}
     </div>
@@ -89,10 +89,7 @@ export default function ProjectCard({ project, variant = 'standard' }: ProjectCa
               featured ? 'h-8' : 'h-[30px]'
             }`}
           >
-            <span className="w-[7px] h-[7px] bg-terminal-border-bright" />
-            <span className="w-[7px] h-[7px] bg-terminal-border-bright" />
-            <span className="w-[7px] h-[7px] bg-terminal-border-bright" />
-            <span className="ml-2">
+            <span className="font-mono">
               {project.id}
             </span>
           </div>
@@ -179,7 +176,7 @@ export default function ProjectCard({ project, variant = 'standard' }: ProjectCa
                 tabIndex={open ? 0 : -1}
                 className="text-terminal-green-dim hover:text-terminal-amber transition-colors duration-200"
               >
-                [close ×]
+                Close ×
               </button>
             </div>
 

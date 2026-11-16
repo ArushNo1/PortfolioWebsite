@@ -6,6 +6,7 @@ interface GitLogProps {
 
 export default async function GitLog({ id }: GitLogProps) {
   const commits = await getRecentCommits(5)
+  if (commits.length === 0) return null
 
   return (
     <section id={id} className="mx-auto w-full max-w-6xl px-6 md:px-12 pt-14 md:pt-20 pb-8">

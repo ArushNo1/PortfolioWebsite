@@ -15,10 +15,9 @@ html {
 
 /* Site font. Both are loaded in layout.tsx; swap to var(--font-geist-mono) to go back to Geist Mono. */
 body {
-  background-color: #0a0f0a;
-  color: #dcebd8;
-  font-family: var(--font-plex-mono);
-  cursor: crosshair;
+  background-color: #0e1110;
+  color: #e6eae7;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
   /* main stretches so the terminal bar never sits mid-screen on short pages */
   min-height: 100vh;
   display: flex;
@@ -37,23 +36,8 @@ summary,
 }
 
 ::selection {
-  background: #5cf55c;
-  color: #0a0f0a;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 255, 0, 0.012) 2px,
-    rgba(0, 255, 0, 0.012) 4px
-  );
-  pointer-events: none;
-  z-index: 9999;
+  background: #7ee787;
+  color: #0e1110;
 }
 
 @keyframes blink {
