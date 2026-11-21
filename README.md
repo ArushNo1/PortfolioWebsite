@@ -50,7 +50,7 @@ published: true
 - [ ] Delete `src/assets/react.svg` (default CNA artifact, never referenced)
 
 ### Features
-- [ ] Add `robots.txt` — `/api/ping` hints at it, completing the easter egg trail
+- [x] Add `robots.txt` — `/api/ping` hints at it, completing the easter egg trail
 - [ ] Add `generateStaticParams` to `src/app/lab/[slug]/page.tsx` for static post generation at build time
 - [ ] Audit MDX prose styling — `prose-invert` on post pages may need custom overrides to match the terminal theme (code blocks, headings, links)
 - [ ] Set `example-post.mdx` to `published: false` until it has real content

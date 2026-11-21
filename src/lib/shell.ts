@@ -13,7 +13,8 @@ export interface PuzzleView {
   solved: boolean
   unlockLabel: string
   unlockHref: string
-  extraNote?: string
+  hint: string
+  technique: string
 }
 
 export interface ShellContext {
@@ -34,7 +35,7 @@ const PAGES: Record<string, string> = {
 }
 
 export const COMMANDS = [
-  'help', 'whoami', 'ls', 'cat', 'open', 'puzzle', 'submit', 'socials', 'resume', 'clear', 'history', 'sudo', 'exit',
+  'help', 'whoami', 'ls', 'cat', 'open', 'puzzle', 'hint', 'submit', 'socials', 'resume', 'clear', 'history', 'sudo', 'exit',
 ] as const
 
 const out = (text: string): Line => ({ kind: 'out', text })
@@ -56,11 +57,10 @@ export function completions(input: string): string[] {
 function puzzleLines(ctx: ShellContext, i: number): Line[] {
   const p = ctx.puzzles[i]
   const lines: Line[] = [{ kind: 'accent', text: `puzzle ${p.tier}${p.solved ? '  [solved]' : ''}` }, out(`cipher: ${p.ciphertext}`)]
-  if (p.extraNote) lines.push(dim(`# ${p.extraNote}`))
   if (p.solved) {
-    lines.push(out(`flag: ${p.flag}`), { kind: 'link', text: p.unlockLabel, href: p.unlockHref })
+    lines.push(dim(`# that was ${p.technique}`), out(`flag: ${p.flag}`), { kind: 'link', text: p.unlockLabel, href: p.unlockHref })
   } else {
-    lines.push(dim('# decode it, then: submit <answer>'))
+    lines.push(dim('# decode it, then: submit <answer>'), dim('# stuck? type: hint'))
   }
   return lines
 }
@@ -80,6 +80,7 @@ export function run(raw: string, ctx: ShellContext, history: string[]): Line[] {
         dim('  cat <project>       project details'),
         dim('  open <page|project> go somewhere'),
         dim('  puzzle [1-3]        show a cipher'),
+        dim('  hint                nudge for the active puzzle'),
         dim('  submit <answer>     answer the active puzzle'),
         dim('  socials, resume, history, clear'),
         dim('tab completes, ↑/↓ walks history'),
@@ -139,13 +140,17 @@ export function run(raw: string, ctx: ShellContext, history: string[]): Line[] {
       ctx.setActive(n)
       return puzzleLines(ctx, n)
     }
+    case 'hint': {
+      const p = ctx.puzzles[ctx.active]
+      return [{ kind: 'accent', text: `puzzle ${p.tier} hint` }, out(p.hint)]
+    }
     case 'submit': {
       if (!arg) return [err('usage: submit <answer>')]
       const p = ctx.puzzles[ctx.active]
       if (p.solved) return [dim(`puzzle ${p.tier} is already solved. try: puzzle ${Math.min(p.tier + 1, 3)}`)]
       if (!ctx.submit(arg)) return [err('access denied')]
       return [
-        { kind: 'accent', text: 'access granted' },
+        { kind: 'accent', text: `correct — that was ${p.technique}` },
         out(`flag: ${p.flag}`),
         { kind: 'link', text: p.unlockLabel, href: p.unlockHref },
       ]
