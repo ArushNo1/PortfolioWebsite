@@ -16,7 +16,12 @@ import {
   TIER3_UNLOCK_LABEL,
   TIER2_PLAINTEXT,
   TIER3_PLAINTEXT,
+  TIER1_HINT,
+  TIER2_HINT,
   TIER3_HINT,
+  TIER1_TECHNIQUE,
+  TIER2_TECHNIQUE,
+  TIER3_TECHNIQUE,
 } from '@/data/challenges'
 import {
   TIER1_CIPHER,
@@ -33,7 +38,8 @@ interface Puzzle {
   unlockLabel: string
   unlockHref: string
   acceptedAnswers: string[]
-  extraNote?: string
+  hint: string
+  technique: string
 }
 
 const puzzles: Puzzle[] = [
@@ -45,6 +51,8 @@ const puzzles: Puzzle[] = [
     unlockLabel: TIER1_UNLOCK_LABEL,
     unlockHref: '/lab',
     acceptedAnswers: ['arush bodla', 'arush'],
+    hint: TIER1_HINT,
+    technique: TIER1_TECHNIQUE,
   },
   {
     tier: 2,
@@ -54,6 +62,8 @@ const puzzles: Puzzle[] = [
     unlockLabel: TIER2_UNLOCK_LABEL,
     unlockHref: '/graveyard',
     acceptedAnswers: [normalizeAnswer(TIER2_PLAINTEXT)],
+    hint: TIER2_HINT,
+    technique: TIER2_TECHNIQUE,
   },
   {
     tier: 3,
@@ -63,7 +73,8 @@ const puzzles: Puzzle[] = [
     unlockLabel: TIER3_UNLOCK_LABEL,
     unlockHref: '/flag',
     acceptedAnswers: [normalizeAnswer(TIER3_PLAINTEXT)],
-    extraNote: TIER3_HINT,
+    hint: TIER3_HINT,
+    technique: TIER3_TECHNIQUE,
   },
 ]
 
@@ -122,7 +133,8 @@ export default function TerminalDrawer() {
             solved: solved[i],
             unlockLabel: p.unlockLabel,
             unlockHref: p.unlockHref,
-            extraNote: p.extraNote,
+            hint: p.hint,
+            technique: p.technique,
           })),
           active,
           setActive,

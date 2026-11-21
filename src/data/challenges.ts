@@ -15,16 +15,16 @@ export const TIER2_PLAINTEXT = 'the dp demons'
 // This phrase unlocks /notes. Make it personal.
 export const TIER3_PLAINTEXT = 'proof by ac'
 
-// TIER 1 hint shown below the ciphertext
-//export const TIER1_HINT = 'HINT: Caesar cipher, shift = 13 (ROT13)'
-
-// TIER 2 hint shown below the ciphertext
-//export const TIER2_HINT = 'HINT: Base64. Twice.'
-
-// TIER 3 hint shown below the ciphertext
-// Include the python decode snippet below the hint
+// Hints, shown only when the visitor types `hint`
+export const TIER1_HINT = 'Caesar cipher, shift = 13 (ROT13): every letter moves 13 places in the alphabet, so a↔n, b↔o, c↔p. Paste it into any ROT13 decoder.'
+export const TIER2_HINT = 'Base64. Twice.'
 export const TIER3_HINT = 'It always ends in (ac)cepted'
 //export const TIER3_PYTHON_SNIPPET = "# python: bytes([b ^ 0x42 for b in bytes.fromhex('CIPHERTEXT_HERE')]).decode()"
+
+// Named on solve, so each puzzle teaches the technique
+export const TIER1_TECHNIQUE = 'ROT13: every letter shifted by 13.'
+export const TIER2_TECHNIQUE = 'base64, decoded twice. base64 is an encoding, not encryption: anyone can reverse it.'
+export const TIER3_TECHNIQUE = 'XOR with key 0x42, written as hex bytes. XOR the bytes with the same key again and the plaintext comes back.'
 
 // What gets displayed after each challenge is solved
 export const TIER1_FLAG = 'welcome!'
