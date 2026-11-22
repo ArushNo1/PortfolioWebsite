@@ -6,7 +6,6 @@ interface AboutProps {
 
 const vitals: Array<[string, string]> = [
   ['INSTITUTION', 'University of Maryland · CS'],
-  ['STATUS', 'Freshman · Class of 2030'],
   ['UNIT', 'ACES Cyber Honors LLC'],
   ['SCHOLAR', 'Banneker/Key'],
   ['FOCUS', 'Security tooling · systems · AI agents'],

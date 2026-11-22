@@ -6,7 +6,6 @@ interface HeroProps {
 }
 
 const stats: Array<{ value: string; label: string }> = [
-  { value: 'ManTech', label: 'Digital forensics intern, 2026' },
   { value: '13 / 4,787', label: 'CyberPatriot Nationals' },
   { value: '5 wins', label: 'Hackathon placements' },
   { value: 'Security+', label: 'CompTIA certified' },
@@ -31,12 +30,11 @@ export default function Hero({ id }: HeroProps) {
             Arush Bodla
           </h1>
           <p className="mt-5 max-w-[640px] text-xl md:text-[22px] leading-[1.45] text-terminal-white text-pretty">
-            Security engineer in training. I build forensics and detection tools, compete in CTFs,
-            and win hackathons.
+            I&apos;m interested in making things deterministic, scalable, and able to fail safely. Lately that&apos;s meant CI/CD, sandboxing, and harnesses + AI tools.
           </p>
           <p className="mt-4 max-w-[600px] text-[15px] leading-relaxed text-terminal-green-dim text-pretty">
-            CS freshman at Maryland in ACES, on the Linux subteam for UMD CCDC. Aiming for AppSec or
-            CNO. Off the clock: Geometry Dash, Kurzgesagt, Wikipedia rabbit holes.
+            I study computer science at the University of Maryland. When I&apos;m not building, I&apos;m
+            probably grinding a Geometry Dash level, watching Kurzgesagt, or scrolling through Wikipedia links.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
@@ -72,7 +70,7 @@ export default function Hero({ id }: HeroProps) {
         </div>
       </div>
 
-      <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-terminal-border bg-terminal-border md:grid-cols-4">
+      <dl className="grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-terminal-border bg-terminal-border sm:grid-cols-3">
         {stats.map(({ value, label }) => (
           <div key={label} className="bg-terminal-surface px-5 py-5">
             <dd className="text-2xl md:text-[28px] font-bold tracking-[-.02em] text-terminal-bright">{value}</dd>
