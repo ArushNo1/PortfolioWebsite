@@ -30,7 +30,7 @@ export default function Hero({ id }: HeroProps) {
             Arush Bodla
           </h1>
           <p className="mt-5 max-w-[640px] text-xl md:text-[22px] leading-[1.45] text-terminal-white text-pretty">
-            I'm interested in making things deterministic, scalable, and able to fail safely. Lately that's meant CI/CD, sandboxing, and harnesses + AI tools.
+            I&apos;m interested in making things deterministic, scalable, and able to fail safely. Lately that&apos;s meant CI/CD, sandboxing, and harnesses + AI tools.
           </p>
           <p className="mt-4 max-w-[600px] text-[15px] leading-relaxed text-terminal-green-dim text-pretty">
             I study computer science at the University of Maryland. When I&apos;m not building, I&apos;m
