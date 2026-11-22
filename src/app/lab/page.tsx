@@ -1,5 +1,6 @@
 import Navbar from '@/components/nav/Navbar'
 import TerminalDrawer from '@/components/challenges/TerminalDrawer'
+import Footer from '@/components/ui/Footer'
 import LabClient from './LabClient'
 import { getAllPosts } from '@/lib/posts'
 
@@ -11,6 +12,7 @@ export default function LabPage() {
       <main>
         <LabClient posts={posts} />
       </main>
+      <Footer />
       <TerminalDrawer />
     </>
   )

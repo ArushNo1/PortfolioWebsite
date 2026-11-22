@@ -1,10 +1,8 @@
 'use client'
 
 import React, { useState } from 'react'
-import { socialLinks } from '@/data/socials'
+import { EMAIL, socialLinks } from '@/data/socials'
 import PageHeader, { SectionLabel } from '@/components/ui/PageHeader'
-
-const EMAIL = 'abodla@umd.edu'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 

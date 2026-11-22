@@ -18,3 +18,5 @@ export const socialLinks: SocialLink[] = [
   },
   { href: 'https://codeforces.com/profile/ArushNo1', label: 'codeforces', Icon: SiCodeforces },
 ]
+
+export const EMAIL = 'abodla@umd.edu'

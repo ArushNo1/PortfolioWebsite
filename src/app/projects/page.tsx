@@ -1,5 +1,6 @@
 import Navbar from '@/components/nav/Navbar'
 import TerminalDrawer from '@/components/challenges/TerminalDrawer'
+import Footer from '@/components/ui/Footer'
 import ProjectCard from '@/components/projects/ProjectCard'
 import ProjectArchive from '@/components/projects/ProjectArchive'
 import PageHeader, { SectionLabel } from '@/components/ui/PageHeader'
@@ -47,6 +48,7 @@ export default function ProjectsPage() {
           <ProjectArchive projects={archive} />
         </section>
       </main>
+      <Footer />
       <TerminalDrawer />
     </>
   )

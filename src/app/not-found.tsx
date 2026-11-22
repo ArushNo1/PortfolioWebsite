@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import Navbar from '@/components/nav/Navbar'
 import TerminalDrawer from '@/components/challenges/TerminalDrawer'
+import Footer from '@/components/ui/Footer'
 
 export const metadata: Metadata = {
   title: 'Not found · Arush Bodla',
@@ -40,6 +41,7 @@ export default function NotFound() {
           </Link>
         </div>
       </main>
+      <Footer />
       <TerminalDrawer />
     </>
   )
