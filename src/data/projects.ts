@@ -65,7 +65,7 @@ export const projects: Project[] = [
     ],
     github: 'https://github.com/ArushNo1/saltline',
     website: 'https://saltline.surf',
-    image: '/RegiMon.png', // placeholder until a Saltline photo is added
+    image: '/saltline.jpeg', // placeholder until a Saltline photo is added
     featured: true,
     event: null,
   },
