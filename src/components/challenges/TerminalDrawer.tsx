@@ -78,10 +78,16 @@ const puzzles: Puzzle[] = [
   },
 ]
 
-// Replaces the footer on every page: a bar pinned to the bottom of the viewport that opens
+// A bar pinned to the bottom of the viewport that opens
 // upward into a working shell. The three CTF puzzles live inside it. /#challenges opens it.
 const WELCOME: Line[] = [
   { kind: 'dim', text: 'arush-sh 1.0. type help to look around, puzzle to start the ctf.' },
+]
+
+const teasers = (left: number) => [
+  "there's a shell down here. click to open",
+  left ? `${left} puzzle${left === 1 ? '' : 's'} hidden on this site` : 'all 3 puzzles solved. nice.',
+  'type help once it opens',
 ]
 
 export default function TerminalDrawer() {
@@ -93,6 +99,8 @@ export default function TerminalDrawer() {
   const [lines, setLines] = useState<Line[]>(WELCOME)
   const [history, setHistory] = useState<string[]>([])
   const [cursor, setCursor] = useState<number | null>(null)
+  const [teaser, setTeaser] = useState(0)
+  const sectionRef = useRef<HTMLElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
 
@@ -111,7 +119,22 @@ export default function TerminalDrawer() {
   }, [])
 
   useEffect(() => {
-    if (open) inputRef.current?.focus({ preventScroll: true })
+    if (open) {
+      inputRef.current?.focus({ preventScroll: true })
+      // Escape from anywhere, and a click anywhere outside the drawer, closes it
+      const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
+      const onPointer = (e: PointerEvent) => {
+        if (!sectionRef.current?.contains(e.target as Node)) setOpen(false)
+      }
+      window.addEventListener('keydown', onKey)
+      document.addEventListener('pointerdown', onPointer)
+      return () => {
+        window.removeEventListener('keydown', onKey)
+        document.removeEventListener('pointerdown', onPointer)
+      }
+    }
+    const id = setInterval(() => setTeaser((t) => t + 1), 4000)
+    return () => clearInterval(id)
   }, [open])
 
   useEffect(() => {
@@ -119,6 +142,7 @@ export default function TerminalDrawer() {
   }, [lines])
 
   const solvedCount = solved.filter(Boolean).length
+  const teaserLines = teasers(3 - solvedCount)
 
   const execute = useCallback(
     (cmd: string) => {
@@ -183,8 +207,6 @@ export default function TerminalDrawer() {
         setCursor(next)
         setInput(history[next])
       }
-    } else if (e.key === 'Escape') {
-      setOpen(false)
     } else if (e.key === 'l' && e.ctrlKey) {
       e.preventDefault()
       setLines([])
@@ -202,26 +224,34 @@ export default function TerminalDrawer() {
 
   return (
     <section
+      ref={sectionRef}
       id="challenges"
       aria-label="Terminal"
       // Column-reversed so the bar stays at the bottom and the shell grows upward above it
       className={`sticky bottom-0 z-40 mt-16 flex flex-col-reverse border-t border-terminal-border bg-terminal-surface font-mono ${open ? 'crt' : ''}`}
     >
       <div className={open ? 'border-t border-terminal-border' : ''}>
-        <div className="relative z-10 flex items-center gap-6 mx-auto w-full max-w-6xl px-6 md:px-12 py-2 text-[13px]">
-          <span className={open ? 'border-b border-terminal-green pb-0.5' : ''}>terminal</span>
-          <span className="text-terminal-green-dim">puzzles {solvedCount}/3</span>
+        <button
+          type="button"
+          onClick={() => setOpen((o) => !o)}
+          aria-expanded={open}
+          aria-controls="terminal-shell"
+          className="group relative z-10 flex min-h-[40px] items-center gap-3 mx-auto w-full max-w-6xl px-6 md:px-12 py-2 text-left text-[13px] focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-terminal-green"
+        >
+          <span aria-hidden className="text-terminal-amber">{open ? 'v' : '^'}</span>
+          {open ? (
+            <span className="border-b border-terminal-green pb-0.5">terminal</span>
+          ) : (
+            <span className="truncate text-terminal-white group-hover:text-terminal-amber transition-colors duration-200">
+              &gt; {teaserLines[teaser % teaserLines.length]}
+            </span>
+          )}
           <span className="flex-1" />
-          <button
-            type="button"
-            onClick={() => setOpen((o) => !o)}
-            aria-expanded={open}
-            aria-controls="terminal-shell"
-            className="min-h-[32px] px-1 text-terminal-green-muted hover:text-terminal-green transition-colors duration-200"
-          >
-            {open ? '[close]' : '[open]'}
-          </button>
-        </div>
+          <span className="shrink-0 text-terminal-green-dim">puzzles {solvedCount}/3</span>
+          <span className="shrink-0 text-terminal-green-muted group-hover:text-terminal-green transition-colors duration-200">
+            {open ? '[esc]' : '[open]'}
+          </span>
+        </button>
       </div>
 
       {open && (
@@ -231,7 +261,7 @@ export default function TerminalDrawer() {
           onClick={() => {
             if (!window.getSelection()?.toString()) inputRef.current?.focus({ preventScroll: true })
           }}
-          className="relative z-10 mx-auto w-full max-w-6xl h-[45vh] max-h-[420px] overflow-y-auto px-6 md:px-12 pt-4 pb-5 text-sm md:text-[15px] leading-relaxed"
+          className="relative z-10 mx-auto w-full max-w-6xl h-[40vh] max-h-[360px] overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden px-6 md:px-12 pt-4 pb-5 text-sm md:text-[15px] leading-relaxed"
         >
           <div role="log" aria-live="polite">
             {lines.map((l, i) =>
