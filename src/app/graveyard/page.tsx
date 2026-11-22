@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Navbar from '@/components/nav/Navbar'
 import TerminalDrawer from '@/components/challenges/TerminalDrawer'
+import Footer from '@/components/ui/Footer'
 import ChallengeGate from '@/components/challenges/ChallengeGate'
 import TerminalBox from '@/components/ui/TerminalBox'
 import { deadProjects } from '@/data/graveyard'
@@ -60,6 +61,7 @@ export default function GraveyardPage() {
           </section>
         )}
       </main>
+      <Footer />
       <TerminalDrawer />
     </>
   )

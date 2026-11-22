@@ -4,6 +4,7 @@ import GitLog from '@/components/home/GitLog'
 import Skills from '@/components/home/Skills'
 import Featured from '@/components/home/Featured'
 import TerminalDrawer from '@/components/challenges/TerminalDrawer'
+import Footer from '@/components/ui/Footer'
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
         <GitLog id="activity" />
         <Skills id="skills" />
       </main>
+      <Footer />
       <TerminalDrawer />
     </>
   )

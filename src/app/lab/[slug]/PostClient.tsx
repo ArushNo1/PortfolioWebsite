@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic'
 import type { ComponentType } from 'react'
 import Navbar from '@/components/nav/Navbar'
 import TerminalDrawer from '@/components/challenges/TerminalDrawer'
+import Footer from '@/components/ui/Footer'
 import type { PostMeta } from '@/lib/posts'
 
 interface PostClientProps {
@@ -94,6 +95,7 @@ export default function PostClient({ slug, meta, headings, minutes, prev, next }
           )}
         </article>
       </main>
+      <Footer />
       <TerminalDrawer />
     </>
   )
